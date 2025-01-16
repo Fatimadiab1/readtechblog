@@ -2,16 +2,14 @@
 <div class="container">
     <h1 class="mt-4">Créer un Nouvel Article</h1>
 
-    <form action="{{ route('categorie.store') }}" method="POST">
+    <form action="{{ route('categorie.store') }}" method="POST" enctype="multipart/form-data">
         @csrf <!-- Protection contre les attaques CSRF -->
 
-        <div class="mb-3">
-            <label for="image" class="form-label">Image (URL)</label>
-            <input type="text" name="image" id="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" required>
-            @error('image')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        @error('image')
+            <span>{{ $message }}</span>
+        @enderror
 
         <div class="mb-3">
             <label for="nom" class="form-label">Nom</label>

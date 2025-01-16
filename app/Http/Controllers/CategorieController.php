@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategorieController extends Controller
 {
@@ -19,21 +20,71 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'nom' => 'required|string|max:255',
             'description' => 'required|string|max:255',
         ]);
 
-        $categorie = Categorie::create([
-            'image' => $request->image,
-            'nom' => $request->nom,
-            'decription' => $request->decription,
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
 
+        Categorie::create([
+            'image' => $imagePath,
+            'nom' => $request->nom,
+            'description' => $request->description,
         ]);
 
-        return redirect()->route('categorie.index', compact('categorie'))->with('success', 'Categorie créé avec succès!');
+        return redirect()->route('categorie.index')->with('success', 'Catégorie créée avec succès!');
     }
 
+    public function edit($id)
+    {
+        $categories = Categorie::findOrFail($id);
+        return view('categorie.edit', compact('categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        // Trouver la catégorie par son ID
+        $categorie = Categorie::findOrFail($id);
+
+        // Gérer l'image si elle est téléchargée
+        $imagePath = $categorie->image; // On garde l'ancienne image par défaut
+
+        if ($request->hasFile('image')) {
+            // Supprimer l'ancienne image si elle existe
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            // Stocker la nouvelle image
+            $imagePath = $request->file('image')->store('images', 'public');
+        }
+
+        $categorie->update([
+            'image' => $imagePath,
+            'nom' => $request->nom,
+            'description' => $request->description,
+        ]);
+
+
+        return redirect()->route('categorie.index')->with('success', 'Catégorie mise à jour avec succès!');
+    }
+
+
+    public function destroy($id)
+    {
+        $categories = Categorie::findOrFail($id);
+        $categories->delete();
+
+        return redirect()->route('categorie.index')->with('success', 'Categorie supprimé avec succès!');
+    }
 }
-
-

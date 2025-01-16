@@ -11,24 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('pays', function (Blueprint $table) {
             $table->id();
-            $table->string('titre')->nullable();
-            $table->string('description')->nullable();
-            $table->string('sous_titre')->nullable();
-            $table->text('contenu')->nullable();
-            $table->string('image')->nullable();
-            $table->string('video')->nullable();
+            $table->string('nom')->nullable();
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('pays');
     }
 };

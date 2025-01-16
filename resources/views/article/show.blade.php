@@ -1,35 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ $article->titre }}</h1>
+            <h4>{{ $article->sous_titre }}</h4>
+            <p><strong>Contenu :</strong> {{ $article->contenu }}</p>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h1>{{ $article->titre }}</h1>
-                <h4>{{ $article->sous_titre }}</h4>
-                <p><strong>Contenu :</strong> {{ $article->contenu }}</p>
-
-                @if($article->image)
-                    <div>
-                        <h5>Image :</h5>
-                        <img src="{{ asset('storage/' . $article->image) }}" alt="Image de l'article" class="img-fluid">
-                    </div>
-                @endif
-
-                @if($article->video)
-                    <div>
-                        <h5>Vidéo :</h5>
-
-                        </video>
-                    </div>
-                @endif
-
-                @if($article->category_id)
-                    <div>
-                        <h5>Catégorie :</h5>
-                        <p>{{ $article->category_id->nom }}</p>
-                    </div>
-                @endif
-
-                <a href="{{ route('article.index') }}" class="btn btn-primary">Retour à la liste des articles</a>
+            @if ($article->image)
+            <div>
+                <h5>Image :</h5>
+                <img src="{{ asset('storage/' .$article->image  ) }}"
+                     alt="Image de l'article"
+                     style="max-width: 100%; height: auto;">
             </div>
+        @endif
+        @if ($article->video)
+        <video width="600" controls>
+            <source src="{{ asset('storage/' . $article->video) }}" type="video/mp4">
+            Votre navigateur ne supporte pas la balise vidéo.
+        </video>
+        @endif
+
+
+            @if ($article->category)
+                <div>
+                    <h5>Catégorie :</h5>
+                    <p>{{ $article->category->nom }}</p>
+                </div>
+            @endif
+
+            <h3>Commentaires</h3>
+            @foreach ($article->commentaires as $commentaire)
+                <div class="commentaire">
+                    <p><strong>{{ $commentaire->user->nom }}</strong> : {{ $commentaire->contenue }}</p>
+                </div>
+            @endforeach
+
+            <h4>Ajouter un commentaire</h4>
+            <form action="{{ route('commentaire.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                <textarea name="contenue" id="contenue" cols="30" rows="5" class="form-control" required></textarea>
+                <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+            </form>
+
         </div>
     </div>
-
+</div>

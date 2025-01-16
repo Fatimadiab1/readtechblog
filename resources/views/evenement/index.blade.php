@@ -1,8 +1,8 @@
 <div class="container my-5">
-    <h1 class="text-center mb-4">Liste des Articles</h1>
+    <h1 class="text-center mb-4">Liste des evenements</h1>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="{{ route('article.create') }}" class="btn btn-success px-4 py-2">Créer un Nouvel Article</a>
+        <a href="{{ route('evenement.create') }}" class="btn btn-success px-4 py-2">Créer un Nouvel Article</a>
         @if(session('success'))
             <div class="alert alert-success mb-0" style="max-width: 400px;">
                 {{ session('success') }}
@@ -15,29 +15,31 @@
             <thead class="bg-primary text-white">
                 <tr class="text-center">
                     <th>#</th>
-                    <th>Image</th>
                     <th>Titre</th>
-                    <th>Description</th>
-                    <th>Sous-titre</th>
+                    <th>Image</th>
+                    <th>Contenu</th>
+                    <th>Date</th>
+                    <th>Pays</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($articles as $index => $article)
+                @forelse($evenements as $index => $evenement)
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
-                        <td><img src="{{ asset('storage/' . $article->image) }}" alt="Image" style="width: 50px; height: 50px;"></td>
-                        <td>{{ $article->titre }}</td>
-                        <td>{{ Str::limit($article->description, 50) }}</td>
-                        <td>{{ Str::limit($article->sous_titre, 30) }}</td>
+                        <td>{{ $evenement->nom }}</td>
+                        <td><img src="{{ asset('storage/' . $evenement->image) }}" alt="Image" style="width: 50px; height: 50px;"></td>
+                        <td>{{ Str::limit($evenement->contenu, 50) }}</td>
+                        <td>{{ $evenement->date }}</td>
+                        <td>  @if ($evenement->pays)
+                                <p>{{ $evenement->pays->nom }}</p>
+                        @endif
+                </td>
                         <td class="text-center">
-                            <a href="{{ route('article.show', $article->id) }}" class="btn btn-info btn-sm me-1">
-                                Voir
-                            </a>
-                            <a href="{{ route('article.edit', $article->id) }}" class="btn btn-warning btn-sm me-1">
+                            <a href="{{ route('evenement.edit', $evenement->id) }}" class="btn btn-warning btn-sm me-1">
                                 Modifier
                             </a>
-                            <form action="{{ route('article.destroy', $article->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('evenement.destroy', $evenement->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm"

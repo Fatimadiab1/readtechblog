@@ -2,7 +2,7 @@
     <h1 class="text-center mb-4">Liste des Articles</h1>
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <a href="{{ route('article.create') }}" class="btn btn-success px-4 py-2">Créer un Nouvel Article</a>
+        <a href="{{ route('pays.create') }}" class="btn btn-success px-4 py-2">Ajouter un nouveau pays</a>
         @if(session('success'))
             <div class="alert alert-success mb-0" style="max-width: 400px;">
                 {{ session('success') }}
@@ -15,37 +15,14 @@
             <thead class="bg-primary text-white">
                 <tr class="text-center">
                     <th>#</th>
-                    <th>Image</th>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Sous-titre</th>
-                    <th>Actions</th>
+                    <th>Nom</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse($articles as $index => $article)
+                @forelse($pays as $index => $payss)
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
-                        <td><img src="{{ asset('storage/' . $article->image) }}" alt="Image" style="width: 50px; height: 50px;"></td>
-                        <td>{{ $article->titre }}</td>
-                        <td>{{ Str::limit($article->description, 50) }}</td>
-                        <td>{{ Str::limit($article->sous_titre, 30) }}</td>
-                        <td class="text-center">
-                            <a href="{{ route('article.show', $article->id) }}" class="btn btn-info btn-sm me-1">
-                                Voir
-                            </a>
-                            <a href="{{ route('article.edit', $article->id) }}" class="btn btn-warning btn-sm me-1">
-                                Modifier
-                            </a>
-                            <form action="{{ route('article.destroy', $article->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
-                                    Supprimer
-                                </button>
-                            </form>
-                        </td>
+                        <td>{{ $payss->nom }}</td>
                     </tr>
                 @empty
                     <tr>
