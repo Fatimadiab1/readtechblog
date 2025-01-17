@@ -30,6 +30,8 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/admin/{id}/edit', [InscriptionAdminController::class, 'edit'])->name('admin.edit');
     Route::put('/admin/{id}', [InscriptionAdminController::class, 'update'])->name('admin.update');
     Route::delete('/admin/{id}', [InscriptionAdminController::class, 'destroy'])->name('admin.destroy');
+    Route::get('/client', [InscriptionAdminController::class, 'client'])->name('client');
+
 });
 
 Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');

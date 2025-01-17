@@ -15,6 +15,12 @@ class ConnexionController extends Controller
     public function login(Request $request)
     {
         $connexion = $request->only('email', 'password');
+        if (!$connexion) {
+            // Si aucun utilisateur n'est trouvé avec cet email
+            return redirect()->route('login')->withErrors([
+                'email' => 'Aucun utilisateur trouvé avec cet email.',
+            ]);
+        }
 
         if (Auth::attempt($connexion)) {
             if (Auth::user()->role == 'admin') {
@@ -22,8 +28,8 @@ class ConnexionController extends Controller
             }
             return redirect()->route('accueil');
         }
-
-        return redirect()->route('connexion.index')->withErrors(['email' => 'Identifiants incorrects.']);
+        alert()->error('ErrorAlert','Les identifiants sont incorrects .');
+        return redirect()->route('login')->withErrors(['email' => 'Identifiants incorrects.']);
     }
     public function logout()
     {

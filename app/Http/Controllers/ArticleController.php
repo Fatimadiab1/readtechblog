@@ -61,10 +61,15 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        //  $user = User::findOrFail($id_user);
+        // $commentaires = $article->commentaires()->whereHas('user')->get();
+
         $article = Article::with('commentaires.user')->findOrFail($id);
-        return view('article.show', compact('article', ));
+
+        // Incrémenter le compteur de vues
+        $article->increment('views');
+        return view('article.show', compact('article'));
     }
+
 
     public function edit($id)
     {
@@ -74,50 +79,50 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    $request->validate([
-        'titre' => 'required|string|max:255',
-        'description' => 'required|string|max:255',
-        'sous_titre' => 'required|string|max:255',
-        'contenu' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'video' => 'nullable|mimes:mp4,mov,avi,wmv|max:10240',
-        'category_id' => 'required|exists:categories,id',
-    ]);
+    {
+        $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'sous_titre' => 'required|string|max:255',
+            'contenu' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'video' => 'nullable|mimes:mp4,mov,avi,wmv|max:10240',
+            'category_id' => 'required|exists:categories,id',
+        ]);
 
-    $article = Article::findOrFail($id);
+        $article = Article::findOrFail($id);
 
-    // Gérer l'image si elle est téléchargée
-    $imagePath = $article->image;
-    if ($request->hasFile('image')) {
+        // Gérer l'image si elle est téléchargée
+        $imagePath = $article->image;
+        if ($request->hasFile('image')) {
 
-        if ($imagePath) {
-            Storage::disk('public')->delete($imagePath);
+            if ($imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+            $imagePath = $request->file('image')->store('images', 'public');
         }
-        $imagePath = $request->file('image')->store('images', 'public');
-    }
 
-     // Gérer la video si elle est téléchargée
-    $videoPath = $article->video;
-    if ($request->hasFile('video')) {
-        if ($videoPath) {
-            Storage::disk('public')->delete($videoPath);
+        // Gérer la video si elle est téléchargée
+        $videoPath = $article->video;
+        if ($request->hasFile('video')) {
+            if ($videoPath) {
+                Storage::disk('public')->delete($videoPath);
+            }
+            $videoPath = $request->file('video')->store('videos', 'public');
         }
-        $videoPath = $request->file('video')->store('videos', 'public');
+
+        $article->update([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'sous_titre' => $request->sous_titre,
+            'contenu' => $request->contenu,
+            'image' => $imagePath,
+            'video' => $videoPath,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect()->route('article.index')->with('success', 'Article mis à jour avec succès!');
     }
-
-    $article->update([
-        'titre' => $request->titre,
-        'description' => $request->description,
-        'sous_titre' => $request->sous_titre,
-        'contenu' => $request->contenu,
-        'image' => $imagePath,
-        'video' => $videoPath,
-        'category_id' => $request->category_id,
-    ]);
-
-    return redirect()->route('article.index')->with('success', 'Article mis à jour avec succès!');
-}
 
 
     public function destroy($id)

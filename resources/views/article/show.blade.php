@@ -19,6 +19,7 @@
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
         @endif
+        <p>Vues : {{ $article->views }}</p>
 
 
             @if ($article->category)
@@ -30,10 +31,14 @@
 
             <h3>Commentaires</h3>
             @foreach ($article->commentaires as $commentaire)
+            @if ($commentaire->user)
                 <div class="commentaire">
-                    <p><strong>{{ $commentaire->user->nom }}</strong> : {{ $commentaire->contenue }}</p>
+                    <p>
+                        <strong>{{ $commentaire->user->nom }}</strong> : {{ $commentaire->contenue }}
+                    </p>
                 </div>
-            @endforeach
+            @endif
+        @endforeach
 
             <h4>Ajouter un commentaire</h4>
             <form action="{{ route('commentaire.store') }}" method="POST">

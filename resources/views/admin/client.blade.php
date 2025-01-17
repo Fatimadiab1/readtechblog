@@ -29,7 +29,7 @@
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('client')}}" class="flex items-center">
+                        <a href="#" class="flex items-center">
                             <span class="text-md font-medium">Utilisateurs</span>
                         </a>
                     </li>
@@ -62,18 +62,14 @@
         <main class="flex-grow ">
 
             <header class="flex justify-between items-center p-4 bg-blue-800 text-white">
-                <h1 class="text-xl font-semibold">Listes des administrateurs</h1>
+                <h1 class="text-xl font-semibold">Listes des clients</h1>
                 <div>
                     <span class="text-md font-medium">Bonjour Admin</span>
                 </div>
             </header>
             {{-- Liste des admins  --}}
             <div class="bg-white shadow-lg rounded-lg p-6 m-3">
-                <div class="flex justify-between mb-4">
-                    <a href="{{ route('registerAdminForm') }}" class="btn bg-green-600 text-white py-2 px-4 rounded shadow-md hover:bg-green-500 transition duration-300">
-                        <i class="fas fa-user-plus"></i> Créer un Admin
-                    </a>
-                </div>
+
 
                 @if (session('success'))
                     <div class="alert alert-success bg-green-100 text-green-800 p-4 rounded-md mb-4">
@@ -91,16 +87,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($admins as $admin)
+                        @foreach ($clients as $client)
                             <tr class="border-t">
-                                <td class="py-2 px-4">{{ $admin->prenom }}</td>
-                                <td class="py-2 px-4">{{ $admin->nom }}</td>
-                                <td class="py-2 px-4">{{ $admin->email }}</td>
+                                <td class="py-2 px-4">{{ $client->prenom }}</td>
+                                <td class="py-2 px-4">{{ $client->nom }}</td>
+                                <td class="py-2 px-4">{{ $client->email }}</td>
                                 <td class="py-2 flex-col text-center ">
-                                    <a href="{{ route('admin.edit', $admin->id) }}" class="btn  text-green-600 py-1 px-4  font-medium hover:text-green-800 transition duration-500">
+                                    <a href="{{ route('admin.edit', $client->id) }}" class="btn  text-green-600 py-1 px-4  font-medium hover:text-green-800 transition duration-500">
                                         Modifier
                                     </a>
-                                    <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('admin.destroy', $client->id) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn text-red-600  py-1 px-4  font-medium hover:text-red-800 transition duration-500"

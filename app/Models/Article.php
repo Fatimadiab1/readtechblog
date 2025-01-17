@@ -16,6 +16,7 @@ class Article extends Model
         'video',
         'user_id',
         'category_id',
+        'views',
     ];
 
     public function category() {
