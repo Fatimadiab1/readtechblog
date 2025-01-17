@@ -10,9 +10,8 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-    <!-- Conteneur principal -->
     <div class="flex h-screen">
-        <!-- Barre latérale -->
+        {{-- sidebar --}}
         <aside class="w-64 bg-blue-600 text-white flex flex-col">
             <div class="p-6 text-2xl font-bold">Dashboard</div>
             <nav class="flex-grow">
@@ -23,7 +22,7 @@
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('admin.index')}}" class="flex items-center">
                             <span class="text-md font-medium">Administrateurs</span>
                         </a>
                     </li>
@@ -56,10 +55,8 @@
                 </form>
             </div>
         </aside>
-
-        <!-- Zone de contenu -->
         <main class="flex-grow ">
-            <!-- Barre supérieure -->
+            {{-- Barre du haut --}}
             <header class="flex justify-between items-center p-4 bg-blue-800 text-white">
                 <h1 class="text-xl font-semibold">Tableau de bord</h1>
                 <div>
@@ -67,10 +64,9 @@
                 </div>
             </header>
 
-            <!-- Contenu principal -->
+        {{-- statistique --}}
             <section class="p-6 ">
                 <div class="flex-col justify-around mt-10">
-                    <!-- Carte 1 -->
                     <div class="bg-blue-800 shadow-xl text-white p-4 rounded mb-5 w-3/12 ">
                         <div class="flex">
                             <i class="fa-solid fa-user mt-1.5" style="color: #ffffff;"></i>
@@ -79,7 +75,7 @@
                         <p class="text-2xl ">{{$utilisateur->count()}}</p>
                     </div>
 
-                    <!-- Carte 2 -->
+                  
                     <div class="bg-blue-700 shadow-xl text-white p-4 rounded  mb-5 w-3/12">
                         <div class="flex">
                             <i class="fa-solid fa-newspaper mt-1.5" style="color: #ffffff;"></i>
@@ -87,7 +83,7 @@
                         </div>
                         <p class="text-2xl ">{{$article->count()}}</p>
                     </div>
-                    <!-- Carte 3 -->
+            
                     <div class="bg-blue-800 shadow-xl text-white p-4 rounded  mb-5 w-3/12">
                         <div class="flex">
                             <i class="fa-solid fa-list mt-1.5" style="color: #ffffff;"></i>
@@ -96,7 +92,7 @@
                         <p class="text-2xl ">{{$categorie->count()}}</p>
                     </div>
                 </div>
-                   <!-- Carte 4 -->
+                
                    <div class="bg-blue-600 shadow-xl text-white p-4 rounded  mb-5 w-3/12 ">
                     <div class="flex">
                         <i class="fa-solid fa-calendar-days mt-1.5" style="color: #ffffff;"></i>

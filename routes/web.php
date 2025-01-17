@@ -26,7 +26,7 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashb
 Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/inscription/admin', [InscriptionAdminController::class, 'create'])->name('registerAdminForm');
     Route::post('/inscription/admin', [InscriptionAdminController::class, 'registerAdmin'])->name('registerAdmin');
-    Route::get('/inscriptionAdmin', [InscriptionAdminController::class, 'index'])->name('admin.index');
+    Route::get('/listeAdmin', [InscriptionAdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/{id}/edit', [InscriptionAdminController::class, 'edit'])->name('admin.edit');
     Route::put('/admin/{id}', [InscriptionAdminController::class, 'update'])->name('admin.update');
     Route::delete('/admin/{id}', [InscriptionAdminController::class, 'destroy'])->name('admin.destroy');
