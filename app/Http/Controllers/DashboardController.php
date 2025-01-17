@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Categorie;
+use App\Models\Evenement;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,7 @@ class DashboardController extends Controller
         $utilisateur = User::all();
         $article = Article::all();
         $categorie = Categorie::all();
-        return view('dashboard.index', compact('utilisateur','article','categorie'));
+        $evenement = Evenement::all();
+        return view('dashboard.index', compact('utilisateur','article','categorie','evenement'));
     }
 }
