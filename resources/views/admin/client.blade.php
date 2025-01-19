@@ -19,33 +19,38 @@
             <nav class="flex-grow">
                 <ul>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
-                        <a href="#" class="flex items-center">
-                            <span class="text-md font-medium">Accueil</span>
+                        <a href="{{ route('dashboard') }}" class="flex items-center">
+                            <span class=" text-md font-medium">Accueil</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('admin.index')}}" class="flex items-center">
+                        <a href="{{ route('admin.index') }}" class="flex items-center">
                             <span class="text-md font-medium">Administrateurs</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('client') }}" class="flex items-center">
                             <span class="text-md font-medium">Utilisateurs</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('categorie.index') }}" class="flex items-center">
                             <span class="text-md font-medium">Catégories</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('article.index') }}" class="flex items-center">
                             <span class="text-md font-medium">Articles</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('evenement.index') }}" class="flex items-center">
                             <span class="text-md font-medium">Evènements</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="" class="flex items-center">
+                            <span class="text-md font-medium">Commentaires</span>
                         </a>
                     </li>
                 </ul>
@@ -53,12 +58,13 @@
             <div class="p-6">
                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                     @csrf
-                    <button class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
+                    <button
+                        class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
                 </form>
             </div>
         </aside>
 
-        {{-- Barre du haut--}}
+        {{-- Barre du haut --}}
         <main class="flex-grow ">
 
             <header class="flex justify-between items-center p-4 bg-blue-800 text-white">
@@ -67,7 +73,7 @@
                     <span class="text-md font-medium">Bonjour Admin</span>
                 </div>
             </header>
-            {{-- Liste des admins  --}}
+            {{-- Liste des users --}}
             <div class="bg-white shadow-lg rounded-lg p-6 m-3">
 
 
@@ -93,13 +99,16 @@
                                 <td class="py-2 px-4">{{ $client->nom }}</td>
                                 <td class="py-2 px-4">{{ $client->email }}</td>
                                 <td class="py-2 flex-col text-center ">
-                                    <a href="{{ route('admin.edit', $client->id) }}" class="btn  text-green-600 py-1 px-4  font-medium hover:text-green-800 transition duration-500">
+                                    <a href="{{ route('admin.edit', $client->id) }}"
+                                        class="btn  text-green-600 py-1 px-4  font-medium hover:text-green-800 transition duration-500">
                                         Modifier
                                     </a>
-                                    <form action="{{ route('admin.destroy', $client->id) }}" method="POST" class="d-inline">
+                                    <form action="{{ route('admin.destroy', $client->id) }}" method="POST"
+                                        class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn text-red-600  py-1 px-4  font-medium hover:text-red-800 transition duration-500"
+                                        <button type="submit"
+                                            class="btn text-red-600  py-1 px-4  font-medium hover:text-red-800 transition duration-500"
                                             onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet administrateur ?')">
                                             Supprimer
                                         </button>
@@ -117,3 +126,4 @@
 </body>
 
 </html>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])

@@ -99,6 +99,7 @@ class EvenementController extends Controller
         $evenements = Evenement::findOrFail($id);
         $evenements->delete();
 
-        return redirect()->route('evenment.index')->with('success', 'Evenement supprimé avec succès!');
+        return redirect()->route('evenement.index')->with('success', 'Evenement supprimé avec succès!');
+
     }
 }

@@ -17,7 +17,7 @@
             <nav class="flex-grow">
                 <ul>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('dashboard')}}" class="flex items-center">
                             <span class=" text-md font-medium">Accueil</span>
                         </a>
                     </li>
@@ -27,23 +27,28 @@
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('client')}}" class="flex items-center">
                         <span class="text-md font-medium">Utilisateurs</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('categorie.index') }}" class="flex items-center">
                         <span class="text-md font-medium">Catégories</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('article.index')}}" class="flex items-center">
                         <span class="text-md font-medium">Articles</span>
                         </a>
                     </li>
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="#" class="flex items-center">
+                        <a href="{{ route('evenement.index')}}" class="flex items-center">
                         <span class="text-md font-medium">Evènements</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="" class="flex items-center">
+                        <span class="text-md font-medium">Commentaires</span>
                         </a>
                     </li>
                 </ul>
@@ -65,43 +70,62 @@
             </header>
 
         {{-- statistique --}}
-            <section class="p-6 ">
-                <div class="flex-col justify-around mt-10">
-                    <div class="bg-blue-800 shadow-xl text-white p-4 rounded mb-5 w-3/12 ">
-                        <div class="flex">
-                            <i class="fa-solid fa-user mt-1.5" style="color: #ffffff;"></i>
-                            <h2 class="text-lg font-semibold ml-2">Utilisateurs</h2>
+        <section class="p-6 mt-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- User Stats Card -->
+                <div class="bg-white rounded-lg shadow-xl p-6 flex items-center justify-between ">
+                    <div class="flex items-center">
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-4 ">
+                            <i class="fa-solid fa-user text-white text-3xl"></i>
                         </div>
-                        <p class="text-2xl ">{{$utilisateur->count()}}</p>
-                    </div>
-
-                  
-                    <div class="bg-blue-700 shadow-xl text-white p-4 rounded  mb-5 w-3/12">
-                        <div class="flex">
-                            <i class="fa-solid fa-newspaper mt-1.5" style="color: #ffffff;"></i>
-                            <h2 class="text-lg font-semibold ml-2">Articles</h2>
+                        <div class="ml-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Utilisateurs</h2>
+                            <p class="text-3xl font-bold text-blue-800">{{$utilisateur->count()}}</p>
                         </div>
-                        <p class="text-2xl ">{{$article->count()}}</p>
-                    </div>
-            
-                    <div class="bg-blue-800 shadow-xl text-white p-4 rounded  mb-5 w-3/12">
-                        <div class="flex">
-                            <i class="fa-solid fa-list mt-1.5" style="color: #ffffff;"></i>
-                            <h2 class="text-lg font-semibold ml-2">Catégories</h2>
-                        </div>
-                        <p class="text-2xl ">{{$categorie->count()}}</p>
                     </div>
                 </div>
-                
-                   <div class="bg-blue-600 shadow-xl text-white p-4 rounded  mb-5 w-3/12 ">
-                    <div class="flex">
-                        <i class="fa-solid fa-calendar-days mt-1.5" style="color: #ffffff;"></i>
-                        <h2 class="text-lg font-semibold ml-2">Evènements</h2>
+    {{-- statistique articles --}}
+                <div class="bg-white rounded-lg shadow-xl p-6 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="bg-gradient-to-r from-green-600 to-green-800 p-4">
+                            <i class="fa-solid fa-newspaper text-white text-3xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Articles</h2>
+                            <p class="text-3xl font-bold text-green-800">{{$article->count()}}</p>
+                        </div>
                     </div>
-                    <p class="text-2xl ">{{$evenement->count()}}</p>
+                </div>
+        
+   {{-- statistique catégories --}}
+                <div class="bg-white rounded-lg shadow-xl p-6 flex items-center justify-between ">
+                    <div class="flex items-center">
+                        <div class="bg-gradient-to-r from-purple-600 to-purple-800 p-4 ">
+                            <i class="fa-solid fa-list text-white text-3xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Catégories</h2>
+                            <p class="text-3xl font-bold text-purple-800">{{$categorie->count()}}</p>
+                        </div>
+                    </div>
+                </div>
+        
+                 {{-- statistique evenements --}}
+                <div class="bg-white rounded-lg shadow-xl p-6 flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="bg-gradient-to-r from-red-600 to-red-800 p-4 ">
+                            <i class="fa-solid fa-calendar-days text-white text-3xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h2 class="text-xl font-semibold text-gray-700">Evènements</h2>
+                            <p class="text-3xl font-bold text-red-800">{{$evenement->count()}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </section>
+        </section>
+        
+
         </main>
     </div>
 </body>
