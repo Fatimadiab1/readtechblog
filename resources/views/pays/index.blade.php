@@ -82,6 +82,7 @@
                             <tr>
                                 <th class="py-3 text-center"></th>
                                 <th class="px-6 py-3">Nom</th>
+                                <th class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,7 +90,19 @@
                                 <tr class="hover:bg-blue-100 transition duration-200">
                                     <td class="px-6 py-3 text-center">{{ $index + 1 }}</td>
                                     <td class="px-6 py-3">{{ $payss->nom }}</td>
-                                </tr>
+                                    <td>
+                                <form action="{{ route('pays.destroy', $payss->id) }}" method="POST"
+                                    class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="btn text-red-600 py-1 px-4 font-medium hover:text-red-800 transition duration-500"
+                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce pays ?')">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            </td>
+                            </tr>
                             @empty
                                 <tr>
                                     <td colspan="2" class="px-6 py-3 text-center text-gray-400">Aucun pays trouvé.</td>

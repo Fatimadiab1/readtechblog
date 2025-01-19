@@ -52,7 +52,8 @@ Route::delete('/categories/{id}', [CategorieController::class, 'destroy'])->name
 });
 
 Route::post('/commentaires', [CommentaireController::class, 'store'])->name('commentaire.store');
-
+Route::get('/listecommentaire', [CommentaireController::class, 'index'])->name('commentaire.index')->middleware(AdminMiddleware::class);
+Route::delete('/commentaires/{id}', [CommentaireController::class, 'destroy'])->name('commentaire.destroy')->middleware(AdminMiddleware::class);
 Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/evenement', [EvenementController::class, 'index'])->name('evenement.index');
     Route::get('/evenement/create', [EvenementController::class, 'create'])->name('evenement.create');
@@ -66,4 +67,5 @@ Route::middleware(AdminMiddleware::class)->group(function () {
         Route::get('/pays', [PaysController::class, 'index'])->name('pays.index');
         Route::get('/pays/create', [PaysController::class, 'create'])->name('pays.create');
         Route::post('/payss', [PaysController::class, 'store'])->name('pays.store');
+        Route::delete('/pays/{id}', [PaysController::class, 'destroy'])->name('pays.destroy');
     });

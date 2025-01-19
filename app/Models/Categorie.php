@@ -11,4 +11,9 @@ class Categorie extends Model
         'nom',
         'description',
     ];
+    public function articles()
+{
+    return $this->hasMany(Article::class, 'category_id'); // Utilisez 'category_id'
+}
+
 }

@@ -19,9 +19,10 @@ class Article extends Model
         'views',
     ];
 
-    public function category() {
-        return $this->belongsTo(Categorie::class);
-    }
+    public function category()
+{
+    return $this->belongsTo(Categorie::class, 'category_id');
+}
     public function commentaires()
     {
         return $this->hasMany(Commentaire::class);

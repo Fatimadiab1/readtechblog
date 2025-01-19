@@ -10,7 +10,10 @@ class CategorieController extends Controller
 {
     public function index()
     {
-        $categories = Categorie::all();
+        $categories = Categorie::withCount(['articles' => function ($query) {
+            $query->where('category_id', '!=', null); // Utilisez 'category_id'
+        }])->get();
+        // $categories = Categorie::all();
         return view('categorie.index', compact('categories'));
     }
     public function create()

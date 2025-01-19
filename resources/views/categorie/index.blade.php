@@ -94,7 +94,7 @@
                         <tr class="bg-blue-800 text-white">
                             <th class="py-2 px-4 text-left">Image</th>
                             <th class="py-2 px-4 text-left">Nom</th>
-                            <th class="py-2 px-4 text-left">Description</th>
+                            <th class="py-2 px-4 text-left">Nombre d'articles</th>
                             <th class="py-2 px-4 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -104,7 +104,7 @@
                                 <td class="py-2 px-4"><img src="{{ asset('storage/' . $categorie->image) }}"
                                         alt="Image" style="width: 50px; height: 50px;"></td>
                                 <td class="py-2 px-4">{{ $categorie->nom }}</td>
-                                <td class="py-2 px-4">{{ $categorie->description }}</td>
+                                <td>{{ $categorie->articles_count }} articles</td>
                                 <td class="py-2 flex-col text-center">
                                     <a href="{{ route('categorie.edit', $categorie->id) }}"
                                         class="btn text-green-600 py-1 px-4 font-medium hover:text-green-800 transition duration-500">

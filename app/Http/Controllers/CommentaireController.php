@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class CommentaireController extends Controller
 {
     public function index(){
-        return view('commentaire.index');
+        $commentaires = Commentaire::with('article')->get();
+        return view('commentaire.index',compact('commentaires'));
     }
     public function create($id){
         $commentaire = Commentaire::findOrfail($id);
@@ -34,6 +35,14 @@ class CommentaireController extends Controller
     ]);
     alert()->info('InfoAlert','Commentaire ajouter avec succes','success');
     return redirect()->route('article.show', $request->article_id)->with('success', 'Commentaire ajouté avec succès!');
+}
+public function destroy($id)
+{
+    $commentaires = Commentaire::findOrFail($id);
+    $commentaires->delete();
+
+    return redirect()->route('commentaire.index')->with('success', 'Evenement supprimé avec succès!');
+
 }
 
 

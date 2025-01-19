@@ -19,8 +19,6 @@
             Votre navigateur ne supporte pas la balise vidéo.
         </video>
         @endif
-        <p>Vues : {{ $article->views }}</p>
-
 
             @if ($article->category)
                 <div>

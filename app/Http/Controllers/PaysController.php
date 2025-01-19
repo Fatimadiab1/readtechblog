@@ -25,4 +25,11 @@ class PaysController extends Controller
         ]);
         return redirect()->route('pays.index')->with('success', 'Pays créé avec succès!');
     }
+    public function destroy($id)
+    {
+        $pays = Pays::findOrFail($id);
+        $pays->delete();
+
+        return redirect()->route('pays.index')->with('success', 'Pays supprimé avec succès!');
+    }
 }

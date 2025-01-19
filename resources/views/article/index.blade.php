@@ -76,7 +76,7 @@
                         class="btn bg-green-600 text-white py-2 px-4 rounded shadow-md hover:bg-green-500 transition duration-300">
                         <i class="fas fa-plus"></i> Créer un Nouvel Article
                     </a>
-                    <a href=""
+                    <a href="{{route('commentaire.index')}}"
                         class="btn bg-green-600 ml-2 text-white py-2 px-4 rounded shadow-md hover:bg-red-500 transition duration-300">
                         <i class="fas fa-comments"></i> Gestion des Commentaires
                     </a>
@@ -96,6 +96,8 @@
                             <th class="py-2 px-4 text-left">Titre</th>
                             <th class="py-2 px-4 text-left">Description</th>
                             <th class="py-2 px-4 text-left">Sous-titre</th>
+                            <th class="py-2 px-4 text-left">Vue</th>
+                            <th class="py-2 px-4 text-left">Date de creation</th>
                             <th class="py-2 px-4 text-left">Commentaires</th>
                             <th class="py-2 px-4 text-center">Actions</th>
                         </tr>
@@ -108,6 +110,9 @@
                                 <td class="py-2 px-4">{{ $article->titre }}</td>
                                 <td class="py-2 px-4">{{ Str::limit($article->description, 5) }}</td>
                                 <td class="py-2 px-4">{{ Str::limit($article->sous_titre, 5) }}</td>
+                                <td class="py-2 px-4">{{ $article->views }}</td>
+                                <td class="py-2 px-4">{{ $article->created_at }}</td>
+                                <td class="py-2 px-4">{{ $article->commentaires_count }}</td>
                                 <td class="py-2 px-4 text-center">
                                     <a href="{{ route('article.show', $article->id) }}"
                                         class="btn text-blue-600 py-1 px-4 font-medium hover:text-blue-800 transition duration-500 block mb-2">
@@ -142,4 +147,4 @@
 </body>
 
 </html>
-@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+@include('sweetalert::alert', ['cdn' => 'https://cdn.jsdelivr.net/npm/sweetalert2@9'])

@@ -14,7 +14,8 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::all();
+        // $articles = Article::all();
+        $articles = Article::withCount('commentaires')->get();
         return view('article.index', compact('articles'));
     }
     public function create()
@@ -22,8 +23,6 @@ class ArticleController extends Controller
         $categories = Categorie::all();
         return view('article.create', compact('categories'));
     }
-
-
     public function store(Request $request)
     {
 
@@ -133,11 +132,9 @@ class ArticleController extends Controller
         return redirect()->route('article.index')->with('success', 'Article supprimé avec succès!');
     }
     public function dashboard()
-{
-    $articles = Article::all(); 
+    {
+        $articles = Article::all();
 
-    return view('admin.dashboard', compact('articles'));
+        return view('admin.dashboard', compact('articles'));
+    }
 }
-
-}
-
