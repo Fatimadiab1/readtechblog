@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evenement;
 use App\Models\Pays;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,12 @@ class PaysController extends Controller
         $pays=Pays::all();
         return view('pays.index'  , compact('pays'));
     }
+    public function show($id){
 
+        $pays = Pays::findOrFail($id);
+        $evenements =Evenement::findOrFail($id);
+        return view('pays.show', compact('pays', 'evenements'));
+    }
     public function store(Request $request){
         $request->validate([
             'nom' => 'required|string|max:255',

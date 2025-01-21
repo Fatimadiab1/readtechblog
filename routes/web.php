@@ -11,6 +11,7 @@ use App\Http\Controllers\InscriptionAdminController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\PaysController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Models\Categorie;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,7 +43,7 @@ Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articl
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.destroy')->middleware(AdminMiddleware::class);
 
 Route::get('/', [HomeController::class, 'home'])->name('accueil');
-Route::get('/categorie/{id}', [CategorieController::class, 'show'])->name('categorie.show');
+
 
 
 Route::middleware(AdminMiddleware::class)->group(function () {
@@ -53,6 +54,7 @@ Route::get('/categories/{id}/edit', [CategorieController::class, 'edit'])->name(
 Route::put('/categories/{id}', [CategorieController::class, 'update'])->name('categorie.update');
 Route::delete('/categories/{id}', [CategorieController::class, 'destroy'])->name('categorie.destroy');
 });
+Route::get('/categories/{id}', [CategorieController::class, 'show'])->name('categorie.show');
 
 Route::post('/commentaires', [CommentaireController::class, 'store'])->name('commentaire.store');
 Route::get('/listecommentaire', [CommentaireController::class, 'index'])->name('commentaire.index')->middleware(AdminMiddleware::class);
@@ -65,6 +67,7 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::put('/evenements/{id}', [EvenementController::class, 'update'])->name('evenement.update');
     Route::delete('/evenements/{id}', [EvenementController::class, 'destroy'])->name('evenement.destroy');
     });
+    Route::get('/evenementshow', [EvenementController::class, 'show'])->name('evenement.show');
 
     Route::middleware(AdminMiddleware::class)->group(function () {
         Route::get('/pays', [PaysController::class, 'index'])->name('pays.index');
@@ -72,3 +75,4 @@ Route::middleware(AdminMiddleware::class)->group(function () {
         Route::post('/payss', [PaysController::class, 'store'])->name('pays.store');
         Route::delete('/pays/{id}', [PaysController::class, 'destroy'])->name('pays.destroy');
     });
+    Route::get('/pays{id}', [PaysController::class, 'show'])->name('pays.show');

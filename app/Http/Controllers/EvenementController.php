@@ -14,14 +14,21 @@ class EvenementController extends Controller
     {
         $evenements = Evenement::all();
 
-        return view('evenement.index' ,compact( 'evenements'));
+        return view('evenement.index', compact('evenements'));
     }
-  
-    
+
+    public function show()
+    {
+        $evenements = Evenement::all();
+        $pays = Pays::all();
+        return view('evenement.show', compact('evenements', 'pays'));
+
+    }
+
     public function create()
     {
         $pays = Pays::all();
-        return view('evenement.create'  ,compact('pays'));
+        return view('evenement.create', compact('pays'));
     }
 
     public function store(Request $request)
@@ -31,7 +38,7 @@ class EvenementController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'contenu' => 'required|string',
             'date' => 'required|date_format:Y-m-d',
-            'pays_id'=>'required|exists:pays,id',
+            'pays_id' => 'required|exists:pays,id',
         ]);
         $imagePath = null;
         if ($request->hasFile('image')) {
@@ -52,7 +59,7 @@ class EvenementController extends Controller
     {
         $evenement = Evenement::findOrFail($id);
         $pays = Pays::all();
-        return view('evenement.edit', compact('evenement','pays'));
+        return view('evenement.edit', compact('evenement', 'pays'));
     }
 
     public function update(Request $request, $id)
@@ -62,7 +69,7 @@ class EvenementController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'contenu' => 'required|string',
             'date' => 'required|date_format:Y-m-d',
-            'pays_id'=>'required|exists:pays,id',
+            'pays_id' => 'required|exists:pays,id',
         ]);
 
         // Trouver la catégorie par son ID
@@ -101,6 +108,5 @@ class EvenementController extends Controller
         $evenements->delete();
 
         return redirect()->route('evenement.index')->with('success', 'Evenement supprimé avec succès!');
-
     }
 }

@@ -12,7 +12,7 @@ class CategorieController extends Controller
     public function index()
     {
         $categories = Categorie::withCount(['articles' => function ($query) {
-            $query->where('category_id', '!=', null); 
+            $query->where('category_id', '!=', null);
         }])->get();
         // $categories = Categorie::all();
         return view('categorie.index', compact('categories'));
@@ -20,15 +20,9 @@ class CategorieController extends Controller
 
     public function show($id)
     {
-        $categorie = Categorie::findOrFail($id); 
-        return view('categorie.show', compact('categorie')); 
+        $categorie = Categorie::findOrFail($id);
+        return view('categorie.show', compact('categorie'));
     }
-    
-    
-    
-    
-
-
     public function create()
     {
         return view('categorie.create');

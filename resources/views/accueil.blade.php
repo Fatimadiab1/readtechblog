@@ -36,14 +36,15 @@
                         </a>
                         <!-- Menu déroulant -->
                         <div id="submenu" class="hidden absolute mt-2 w-48 bg-white text-black  ">
-                            @foreach ($categories as $category)
-                                <a href="#" class="block px-4 py-2 text-md hover:text-blue-600 transition duration-500">{{ $category->nom }}</a>
+                            @foreach ($categories as $categorie)
+                                <a href="{{route('categorie.show', ['id' => $categorie->id])}}" class="block px-4 py-2 text-md hover:text-blue-600 transition duration-500">{{ $categorie->nom }}</a>
                             @endforeach
                         </div>
                     </div>
-                    
 
-                <a href="#lien3"
+                    {{-- @foreach ($evenements as $evenement)
+                    @endforeach --}}
+                <a href="{{route('evenement.show')}}"
                     class="text-white font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Evènements</a>
             </div>
 
@@ -56,10 +57,10 @@
                     <i class="fas fa-search text-gray-500"></i>
                     <input type="text" placeholder="Rechercher" class="ml-2 text-gray-500 placeholder-gray-500 focus:outline-none">
                 </div>
-            
+
                 <div class="relative">
                     <i id="auth-icon" class="fa-regular fa-circle-user text-white text-3xl cursor-pointer"></i>
-            
+
                     <div id="auth-dropdown" class="absolute right-0 mt-2 w-40 bg-white text-black shadow-lg rounded-lg hidden">
                         @guest
                             <a href="{{ route('login') }}" class="block px-4 py-2 text-md hover:text-blue-700 transition duration-500">Connexion</a>
@@ -74,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <div class="md:hidden">
                 <button id="menu-toggle" class="text-2xl text-white focus:outline-none">
@@ -95,7 +96,7 @@
             </p>
             <i class="fas fa-arrow-down text-2xl md:text-3xl lg:text-4xl mt-6 text-[#008CFF]"></i>
         </div>
-        
+
 
       <!-- Menu mobile -->
 <div id="mobile-menu" class="hidden flex-col space-y-4 mt-20 bg-black bg-opacity-100 p-4 text-center text-lg md:hidden absolute top-0 left-0 w-full z-20">
@@ -114,12 +115,12 @@
         </a>
         <!-- Sous-menu mobile -->
         <div id="submenu-mobile" class="hidden mt-2 bg-white text-black shadow-lg rounded-lg">
-            @foreach ($categories as $category)
-                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200">{{ $category->nom }}</a>
+            @foreach ($categories as $categorie)
+                <a href="{{route('categorie.show', ['id' => $categorie->id])}}" class="block px-4 py-2 text-sm hover:bg-gray-200">{{ $categorie->nom }}</a>
             @endforeach
         </div>
     </div>
-    
+
 </div>
 
     @guest
@@ -143,14 +144,14 @@
         <div class="articles">
             @foreach ($articles as $article)
                 <div class="article-card">
-                   
+
                     <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="article-image">
-                    
-                   
+
+
                     <h3 class="article-title">{{ $article->titre }}</h3>
-                
+
                     <p class="article-description">{{ Str::limit($article->description, 100) }}</p>
-                   
+
                     <a  data-aos="fade-up"  href="{{ route('article.show', $article->id) }}" class="article-readmore" >
                         Lire plus <i class="fas fa-arrow-right"></i>
                     </a>
@@ -160,12 +161,12 @@
         <img class="handrobot2" src="img/mainrobot.png" alt="Main Robot Inversée">
  </section>
 
-        
+
         {{-- Partie categories --}}
-   
+
     <section class="secondsection py-16">
         <p class="titrecategorie">Nos différentes <span style="color:#008CFF">catégories</span></p>
-    
+
         <div class="container">
             <div class="slider-container">
                 <div class="slider">
@@ -181,13 +182,13 @@
                     </div>
                     @endforeach
                 </div>
-    
+
                 <button class="slider-btn prev">&lt;</button>
                 <button class="slider-btn next">&gt;</button>
             </div>
         </div>
     </section>
-    
+
 {{-- Partie a propos --}}
 <section class="thirdsection">
     <img class="robot" src="img/robot.png" alt="">
@@ -200,7 +201,7 @@
                 eadtechblog est une plateforme incontournable pour les passionnés de technologie et les curieux du monde numérique. Nous proposons des articles détaillés, des analyses approfondies et des guides pratiques couvrant une large gamme de sujets technologiques.
                 readtechblog est une plateforme
                 <br><br>
-                Chez ReadTechBlog, nous croyons en la puissance 
+                Chez ReadTechBlog, nous croyons en la puissance
                 de l'information pour éclairer, inspirer et transformer.
                  Notre objectif est de rendre la technologie accessible à tous .
             </p>
@@ -233,9 +234,9 @@
         <img data-aos="zoom-in" class="robotcache" src="img/robot2.png" alt="">
     </section>
     {{-- Formulaire de contact --}}
-    <section class="sectionfive"> 
+    <section class="sectionfive">
 <p data-aos="fade-up" class="titreform">
-  Contactez-<span style="color:#008CFF">nous !</span> 
+  Contactez-<span style="color:#008CFF">nous !</span>
 </p>
         <form action="#" method="post" class="form-container">
             <div class="form-row">
@@ -247,11 +248,11 @@
                 </div>
             </div>
             <div class="form-group">
-       
+
                 <input class="put"  type="email" id="email" name="email" placeholder="Votre email" required>
             </div>
             <div class="form-group">
-              
+
                 <textarea class="put" id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
             </div>
             <div class="checkbox-group">
