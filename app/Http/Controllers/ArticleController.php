@@ -18,6 +18,7 @@ class ArticleController extends Controller
         $articles = Article::withCount('commentaires')->get();
         return view('article.index', compact('articles'));
     }
+   
     public function create()
     {
         $categories = Categorie::all();
@@ -30,7 +31,7 @@ class ArticleController extends Controller
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'sous_titre' => 'required|string|max:255',
-            'contenu' => 'required|string|max:255',
+            'contenu' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'video' => 'nullable|mimes:mp4,mov,avi,wmv|max:10240',
             'category_id' => 'required|exists:categories,id',
@@ -137,4 +138,5 @@ class ArticleController extends Controller
 
         return view('admin.dashboard', compact('articles'));
     }
+    
 }

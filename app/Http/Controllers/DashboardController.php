@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Categorie;
 use App\Models\Evenement;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
+        // Récupérer les utilisateurs
         $utilisateur = User::all();
-        $article = Article::all();
+
+        // Récupérer les 6 derniers articles, triés par date de création
+        $article = Article::latest()->take(6)->get();
+
+        // Récupérer toutes les catégories et événements
         $categorie = Categorie::all();
         $evenement = Evenement::all();
-        return view('dashboard.index', compact('utilisateur','article','categorie','evenement'));
+
+        // Retourner la vue avec les données
+        return view('dashboard.index', compact('utilisateur', 'article', 'categorie', 'evenement'));
     }
 }
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,11 +12,23 @@ class CategorieController extends Controller
     public function index()
     {
         $categories = Categorie::withCount(['articles' => function ($query) {
-            $query->where('category_id', '!=', null); // Utilisez 'category_id'
+            $query->where('category_id', '!=', null); 
         }])->get();
         // $categories = Categorie::all();
         return view('categorie.index', compact('categories'));
     }
+
+    public function show($id)
+    {
+        $categorie = Categorie::findOrFail($id); 
+        return view('categorie.show', compact('categorie')); 
+    }
+    
+    
+    
+    
+
+
     public function create()
     {
         return view('categorie.create');

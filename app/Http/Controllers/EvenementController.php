@@ -16,7 +16,8 @@ class EvenementController extends Controller
 
         return view('evenement.index' ,compact( 'evenements'));
     }
-
+  
+    
     public function create()
     {
         $pays = Pays::all();
@@ -28,7 +29,7 @@ class EvenementController extends Controller
         $request->validate([
             'nom' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'contenu' => 'required|string|max:255',
+            'contenu' => 'required|string',
             'date' => 'required|date_format:Y-m-d',
             'pays_id'=>'required|exists:pays,id',
         ]);
@@ -59,7 +60,7 @@ class EvenementController extends Controller
         $request->validate([
             'nom' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'contenu' => 'required|string|max:255',
+            'contenu' => 'required|string',
             'date' => 'required|date_format:Y-m-d',
             'pays_id'=>'required|exists:pays,id',
         ]);

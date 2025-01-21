@@ -12,57 +12,51 @@
 <body class="bg-gray-100 min-h-screen">
 
     <div class="flex min-h-screen">
-        {{-- Sidebar --}}
-        <aside class="w-64 bg-blue-600 text-white flex flex-col">
-            <div class="p-6 text-2xl font-bold">Dashboard</div>
-            <nav class="flex-grow">
-                <ul>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
-                        <a href="{{ route('dashboard') }}" class="flex items-center">
-                            <span class=" text-md font-medium">Accueil</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('admin.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Administrateurs</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('client') }}" class="flex items-center">
-                            <span class="text-md font-medium">Utilisateurs</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('categorie.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Catégories</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('article.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Articles</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('evenement.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Evènements</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="" class="flex items-center">
-                            <span class="text-md font-medium">Commentaires</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="p-6">
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button
-                        class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
-                </form>
-            </div>
-        </aside>
-
+            {{-- Sidebar --}}
+            <aside class="w-64 bg-blue-600 text-white flex flex-col">
+                <div class="p-6 text-2xl font-bold">Dashboard</div>
+                <nav class="flex-grow">
+                    <ul>
+                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
+                            <a href="{{ route('dashboard') }}" class="flex items-center">
+                                <span class=" text-md font-medium">Accueil</span>
+                            </a>
+                        </li>
+                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                            <a href="{{ route('admin.index') }}" class="flex items-center">
+                                <span class="text-md font-medium">Administrateurs</span>
+                            </a>
+                        </li>
+                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                            <a href="{{ route('client') }}" class="flex items-center">
+                                <span class="text-md font-medium">Utilisateurs</span>
+                            </a>
+                        </li>
+                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                            <a href="{{ route('categorie.index') }}" class="flex items-center">
+                                <span class="text-md font-medium">Catégories</span>
+                            </a>
+                        </li>
+                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                            <a href="{{ route('article.index') }}" class="flex items-center">
+                                <span class="text-md font-medium">Articles</span>
+                            </a>
+                        </li>
+                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                            <a href="{{ route('evenement.index') }}" class="flex items-center">
+                                <span class="text-md font-medium">Evènements</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="p-6">
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button
+                            class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
+                    </form>
+                </div>
+            </aside>
 
         <main class="flex-grow">
             {{-- Barre du haut --}}

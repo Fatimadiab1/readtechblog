@@ -49,11 +49,6 @@
                             <span class="text-md font-medium">Evènements</span>
                         </a>
                     </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="" class="flex items-center">
-                            <span class="text-md font-medium">Commentaires</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <div class="p-6">
@@ -83,9 +78,9 @@
                         class="btn bg-green-600 text-white py-2 px-4 rounded shadow-md hover:bg-green-500 transition duration-300">
                         <i class="fas fa-plus"></i> Créer un Nouvel Evenement
                     </a>
-                    <a href=""
+                    <a href="{{ route('pays.index')}}"
                     class="btn bg-green-600 ml-2 text-white py-2 px-4 rounded shadow-md hover:bg-red-500 transition duration-300">
-                    <i class="fas fa-comments"></i> Gestion des Commentaires
+                    <i class="fas fa-map"></i> Gestion des Pays
                 </a>
                 </div>
 

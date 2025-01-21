@@ -13,8 +13,8 @@
 
     <div class="flex h-screen">
 
-        {{-- Sidebar --}}
-        <aside class="w-64 bg-blue-600 text-white flex flex-col">
+           {{-- Sidebar --}}
+           <aside class="w-64 bg-blue-600 text-white flex flex-col">
             <div class="p-6 text-2xl font-bold">Dashboard</div>
             <nav class="flex-grow">
                 <ul>
@@ -48,11 +48,6 @@
                             <span class="text-md font-medium">Evènements</span>
                         </a>
                     </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="" class="flex items-center">
-                            <span class="text-md font-medium">Commentaires</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <div class="p-6">
@@ -63,7 +58,6 @@
                 </form>
             </div>
         </aside>
-
         {{-- Barre du haut --}}
         <main class="flex-grow ">
 

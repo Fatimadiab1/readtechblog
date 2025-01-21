@@ -6,15 +6,14 @@ use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InscriptionAdminController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\PaysController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('accueil');
-});
+
 
 Route::get('/inscription', [InscriptionController::class, 'formregister'])->name('register');
 Route::post('/inscription', [InscriptionController::class, 'register']);
@@ -41,6 +40,10 @@ Route::get('/articles/{id}', [ArticleController::class, 'show'])->name('article.
 Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit')->middleware(AdminMiddleware::class);
 Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('article.update')->middleware(AdminMiddleware::class);
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('article.destroy')->middleware(AdminMiddleware::class);
+
+Route::get('/', [HomeController::class, 'home'])->name('accueil');
+Route::get('/categorie/{id}', [CategorieController::class, 'show'])->name('categorie.show');
+
 
 Route::middleware(AdminMiddleware::class)->group(function () {
 Route::get('/categorie', [CategorieController::class, 'index'])->name('categorie.index');

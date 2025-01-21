@@ -11,8 +11,8 @@
 
 <body class="bg-gray-100 min-h-screen">
     <div class="flex h-screen">
-        {{-- Side bar --}}
-        <aside class="w-64 bg-blue-600 text-white flex flex-col">
+          {{-- Sidebar --}}
+          <aside class="w-64 bg-blue-600 text-white flex flex-col">
             <div class="p-6 text-2xl font-bold">Dashboard</div>
             <nav class="flex-grow">
                 <ul>
@@ -44,11 +44,6 @@
                     <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
                         <a href="{{ route('evenement.index') }}" class="flex items-center">
                             <span class="text-md font-medium">Evènements</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="" class="flex items-center">
-                            <span class="text-md font-medium">Commentaires</span>
                         </a>
                     </li>
                 </ul>
