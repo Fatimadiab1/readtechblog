@@ -9,8 +9,6 @@
 </head>
 
 <body>
-    {{-- NAVBAR --}}
-
 
     {{-- HEADER --}}
     <header class="bg-black text-white py-10">

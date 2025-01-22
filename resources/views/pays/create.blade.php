@@ -74,7 +74,7 @@
                         <div class="mb-6">
                             <label for="nom" class="block text-sm font-semibold text-gray-700">Nom du pays</label>
                             <input type="text" name="nom" id="nom" class="mt-2 w-full p-3 border  rounded-lg @error('nom')
-                             border-red-500 @enderror" 
+                             border-red-500 @enderror"
                                 value="{{ old('nom') }}" required>
                             @error('nom')
                                 <div class="mt-2 text-sm text-red-500">{{ $message }}</div>
@@ -83,11 +83,11 @@
 
                         <button type="submit"
                         class="w-full bg-blue-600 hover:bg-blue-500 py-2 rounded-lg text-white transition duration-500">
-                        Créer 
+                        Créer
                     </button>
-                          
-                          
-                    
+
+
+
                     </form>
                 </div>
             </section>
