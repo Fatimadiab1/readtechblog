@@ -22,7 +22,7 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-image: url('{{ asset('storage/' . $categorie->image) }}');
-    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8); 
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
 }
     </style>
 </head>
@@ -32,7 +32,7 @@
     <nav class="flex items-center justify-between top-0 w-full p-6   bg-black">
         <div class="links hidden md:flex space-x-20">
             <a href="{{ route('accueil') }}" class="text-white font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Accueil</a>
-            
+
             <div class="relative">
                 <a id="categorie-link" class="text-white font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF] cursor-pointer">
                     Catégories
@@ -66,7 +66,7 @@
                     required
                 >
             </form>
-            
+
 
             <div class="relative">
                 <i id="auth-icon" class="fa-regular fa-circle-user text-white text-3xl cursor-pointer"></i>
@@ -104,7 +104,7 @@
             required
         >
     </form>
-    
+
 <div class="flex items-center justify-center text-center ">
 
     <a  href="{{ route('accueil') }}"  class="text-white m-1 font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Accueil</a>
@@ -116,8 +116,8 @@
         </a>
         <!-- Sous-menu mobile -->
         <div id="submenu-mobile" class="hidden mt-2 bg-white text-black shadow-lg rounded-lg">
-            @foreach ($categories as $categorie)
-                <a href="{{route('categorie.show', ['id' => $categorie->id])}}" class="block px-4 py-2 text-sm hover:bg-gray-200">{{ $categorie->nom }}</a>
+            @foreach ($categories as $cato)
+                <a href="{{route('categorie.show', ['id' => $cato->id])}}" class="block px-4 py-2 text-sm hover:bg-gray-200">{{ $cato->nom }}</a>
             @endforeach
         </div>
     </div>
@@ -138,7 +138,7 @@
 
 
     {{-- HEADER --}}
-    <header 
+    <header
     class="header-categorie relative flex items-center justify-center text-white text-center"
     style="background-image: url('{{ asset('storage/' . $categorie->image) }}');">
     <div class="overlay absolute inset-0 bg-black opacity-50"></div>
@@ -155,16 +155,16 @@
     <div class="articles">
         @foreach ($categorie->articles as $article)
             <div class="article-card">
-            
+
                 <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->titre }}" class="article-image">
 
-            
+
                 <h3 class="article-title">{{ $article->titre }}</h3>
 
-      
+
                 <p class="article-description">{{ Str::limit($article->description, 100) }}</p>
 
-         
+
                 <a  href="{{ route('article.show', $article->id) }}" class="article-readmore">
                     Lire plus <i class="fas fa-arrow-right"></i>
                 </a>

@@ -20,17 +20,17 @@ class CategorieController extends Controller
 
     public function show($id)
     {
-    
+
         $categorie = Categorie::with('articles')->findOrFail($id);
-        
-     
+
+
         $categories = Categorie::all();
 
         return view('categorie.show', compact('categorie', 'categories'));
     }
-    
-    
-    
+
+
+
     public function create()
     {
         return view('categorie.create');
