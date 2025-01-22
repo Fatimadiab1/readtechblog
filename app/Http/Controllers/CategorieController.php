@@ -14,15 +14,23 @@ class CategorieController extends Controller
         $categories = Categorie::withCount(['articles' => function ($query) {
             $query->where('category_id', '!=', null);
         }])->get();
-        // $categories = Categorie::all();
+
         return view('categorie.index', compact('categories'));
     }
 
     public function show($id)
     {
-        $categorie = Categorie::findOrFail($id);
-        return view('categorie.show', compact('categorie'));
+    
+        $categorie = Categorie::with('articles')->findOrFail($id);
+        
+     
+        $categories = Categorie::all();
+
+        return view('categorie.show', compact('categorie', 'categories'));
     }
+    
+    
+    
     public function create()
     {
         return view('categorie.create');

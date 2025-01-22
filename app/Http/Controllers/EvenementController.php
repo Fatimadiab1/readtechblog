@@ -21,9 +21,11 @@ class EvenementController extends Controller
     {
         $evenements = Evenement::all();
         $pays = Pays::all();
-        return view('evenement.show', compact('evenements', 'pays'));
-
+        $categories = \App\Models\Categorie::all(); // Ajout des catégories
+    
+        return view('evenement.show', compact('evenements', 'pays', 'categories'));
     }
+    
 
     public function create()
     {

@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $articles = Article::latest()->take(4)->get();
+        $articles = Article::latest()->take(6)->get();
         $evenements = Evenement::with('pays')->latest()->take(4)->get();
         $categories = Categorie::withCount('articles')->get();
 

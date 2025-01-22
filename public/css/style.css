@@ -33,7 +33,7 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 350px;
+    max-width: 400px;
     margin-bottom: 20px; 
 }
 
@@ -355,18 +355,6 @@ transition: ease-in 0.4s ;
 color: #005BB5;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

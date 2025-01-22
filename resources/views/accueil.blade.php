@@ -26,7 +26,7 @@
         <!-- NAVBAR -->
         <nav class="flex items-center justify-between top-0 w-full p-4 mt-2 z-10">
             <div class="links hidden md:flex space-x-20">
-                <a href="#lien1"
+                <a href="{{ route('accueil') }}"
                     class="text-white font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Accueil</a>
 
                     <div class="relative">
@@ -53,10 +53,18 @@
             </div>
 
             <div class="hidden md:flex items-center space-x-6 relative">
-                <div class="flex items-center bg-white rounded-full shadow-md px-4 py-2">
+                <form action="{{ route('search') }}" method="GET" class="flex items-center w-full bg-gray-100 rounded-lg shadow-md px-4 py-2">
                     <i class="fas fa-search text-gray-500"></i>
-                    <input type="text" placeholder="Rechercher" class="ml-2 text-gray-500 placeholder-gray-500 focus:outline-none">
-                </div>
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Rechercher"
+                        class="ml-2 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white bg-transparent w-full"
+                        required
+                    >
+                </form>
+                
+                
 
                 <div class="relative">
                     <i id="auth-icon" class="fa-regular fa-circle-user text-white text-3xl cursor-pointer"></i>
@@ -100,13 +108,20 @@
 
       <!-- Menu mobile -->
 <div id="mobile-menu" class="hidden flex-col space-y-4 mt-20 bg-black bg-opacity-100 p-4 text-center text-lg md:hidden absolute top-0 left-0 w-full z-20">
-    <div class="flex items-center bg-white rounded-full shadow-md px-4 py-2">
+    <form action="{{ route('search') }}" method="GET" class="flex items-center w-full bg-gray-100 rounded-lg shadow-md px-4 py-2">
         <i class="fas fa-search text-gray-500"></i>
-        <input type="text" placeholder="Rechercher" class="ml-2 text-gray-500 placeholder-gray-500 focus:outline-none w-full">
-    </div>
+        <input
+            type="text"
+            name="q"
+            placeholder="Rechercher"
+            class="ml-2 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white bg-transparent w-full"
+            required
+        >
+    </form>
+    
 <div class="flex items-center justify-center text-center ">
 
-    <a href="#lien1" class="text-white m-1 font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Accueil</a>
+    <a href="{{ route('accueil') }}" class="text-white m-1 font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Accueil</a>
 
     <div class="relative">
         <a id="categorie-link-mobile" class="text-white font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF] cursor-pointer">
@@ -145,7 +160,7 @@
             @foreach ($articles as $article)
                 <div class="article-card">
 
-                    <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="article-image">
+                    <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="article-image h-[250px]">
 
 
                     <h3 class="article-title">{{ $article->titre }}</h3>
@@ -300,7 +315,7 @@
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
     AOS.init({
-        duration: 1000, // Durée des animations en millisecondes
+        duration:700, // Durée des animations en millisecondes
         once: true,     // Animation exécutée une seule fois
     });
 </script>

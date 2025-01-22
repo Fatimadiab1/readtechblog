@@ -61,15 +61,19 @@ class ArticleController extends Controller
 
     public function show($id)
     {
-        // $commentaires = $article->commentaires()->whereHas('user')->get();
-
+        // Récupérer l'article avec ses commentaires et utilisateurs associés
         $article = Article::with('commentaires.user')->findOrFail($id);
-
+    
+        // Récupérer toutes les catégories
+        $categories = Categorie::all();
+    
         // Incrémenter le compteur de vues
         $article->increment('views');
-        return view('article.show', compact('article'));
+    
+        // Passer $categories à la vue
+        return view('article.show', compact('article', 'categories'));
     }
-
+    
 
     public function edit($id)
     {

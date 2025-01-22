@@ -122,3 +122,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+ // Gestion de l'affichage du menu
+ document.querySelector('.dropdown-btn').addEventListener('click', function () {
+    const dropdownContent = document.querySelector('.dropdown-content');
+    dropdownContent.classList.toggle('hidden');
+});
+
+// Fermer le menu en cliquant en dehors
+document.addEventListener('click', function (e) {
+    const dropdown = document.querySelector('.dropdown');
+    if (!dropdown.contains(e.target)) {
+        document.querySelector('.dropdown-content').classList.add('hidden');
+    }
+});
