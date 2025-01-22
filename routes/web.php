@@ -25,7 +25,7 @@ Route::post('/inscription', [InscriptionController::class, 'register']);
 Route::get('/connexion', [ConnexionController::class, 'formlogin'])->name('login');
 Route::post('/connexion', [ConnexionController::class, 'login']);
 Route::post('/logout', [ConnexionController::class, 'logout'])->name('logout');
-Route::get('/accueil', [ConnexionController::class, 'accueil'])->name('accueil');
+// Route::get('/accueil', [ConnexionController::class, 'accueil'])->name('accueil');
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware(AdminMiddleware::class);
 Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/inscription/admin', [InscriptionAdminController::class, 'create'])->name('registerAdminForm');
