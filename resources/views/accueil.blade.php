@@ -102,7 +102,10 @@
             <p class="text-white font-actor font-light text-sm md:text-base lg:text-lg xl:text-xl mt-4">
                 Comprenez aujourd'hui, innovez demain.
             </p>
-            <i class="fas fa-arrow-down text-2xl md:text-3xl lg:text-4xl mt-6 text-[#008CFF]"></i>
+            <a href="#apropos">
+                <i class="fas fa-arrow-down text-2xl md:text-3xl lg:text-4xl mt-6 text-[#008CFF] cursor-pointer"></i>
+            </a>
+            
         </div>
 
 
@@ -179,34 +182,37 @@
 
         {{-- Partie categories --}}
 
-    <section class="secondsection py-16">
-        <p class="titrecategorie">Nos différentes <span style="color:#008CFF">catégories</span></p>
-
-        <div class="container">
-            <div class="slider-container">
-                <div class="slider">
-                    @foreach ($categories as $categorie)
-                    <div class="slide">
-                        <div class="category-card">
-                            <img src="{{ asset('storage/' . $categorie->image) }}" alt="{{ $categorie->nom }}" class="category-image">
-                            <div class="category-overlay">
-                                <div class="text1">{{ $categorie->nom }}</div>
-                                <div class="text2">{{ $categorie->articles_count }} articles</div>
-                            </div>
+        <section class="secondsection py-16">
+            <p class="titrecategorie">Nos différentes <span style="color:#008CFF">catégories</span></p>
+        
+            <div class="container">
+                <div class="slider-container">
+                    <div class="slider">
+                        @foreach ($categories as $categorie)
+                        <div class="slide">
+                            <a href="{{ route('categorie.show', ['id' => $categorie->id]) }}" class="category-link">
+                                <div class="category-card">
+                                    <img src="{{ asset('storage/' . $categorie->image) }}" alt="{{ $categorie->nom }}" class="category-image">
+                                    <div class="category-overlay">
+                                        <div class="text1">{{ $categorie->nom }}</div>
+                                        <div class="text2">{{ $categorie->articles_count }} articles</div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
+        
+                    <button class="slider-btn prev">&lt;</button>
+                    <button class="slider-btn next">&gt;</button>
                 </div>
-
-                <button class="slider-btn prev">&lt;</button>
-                <button class="slider-btn next">&gt;</button>
             </div>
-        </div>
-    </section>
+        </section>
+        
 
 {{-- Partie a propos --}}
-<section class="thirdsection">
-    <img class="robot" src="img/robot.png" alt="">
+<section id="apropos" class="thirdsection">
+    <img  class="robot" src="img/robot.png" alt="">
     <div class="apropos">
         <p class="titreapropos" data-aos="fade-up">Qui somme<span style="color:#008CFF"> nous</span>?</p>
         <div class="container">
@@ -238,44 +244,44 @@
                             <p class="event-date">{{ $evenement->date }} <span style="color: white"> | </span> </p>
                             <p class="event-location">{{ $evenement->pays->nom }}</p>
                         </div>
-                        <a class="lelien" href="">En savoir plus</a>
+                        <a class="lelien" href="{{route("evenement.show")}}">En savoir plus</a>
                         </div>
-                        <h3 class="event-title">{{ $evenement->nom }}</h3>
+                        <h3 class="event-title" data-aos="fade-up">{{ $evenement->nom }}</h3>
                         <hr class="event-divider">
                     </div>
                 @endforeach
             </div>
         </div>
-        <img data-aos="zoom-in" class="robotcache" src="img/robot2.png" alt="">
+        <img  class="robotcache" src="img/robot2.png" alt="">
     </section>
     {{-- Formulaire de contact --}}
     <section class="sectionfive">
 <p data-aos="fade-up" class="titreform">
   Contactez-<span style="color:#008CFF">nous !</span>
 </p>
-        <form action="#" method="post" class="form-container">
-            <div class="form-row">
-                <div class="form-group">
-                    <input class="put" type="text" id="nom" name="nom" placeholder="Votre nom" required>
-                </div>
-                <div class="form-group">
-                    <input class="put"  type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
-                </div>
-            </div>
-            <div class="form-group">
+<form action="{{ route('contact.send') }}" method="POST" class="form-container">
+    @csrf
+    <div class="form-row">
+        <div class="form-group">
+            <input class="put" type="text" id="nom" name="nom" placeholder="Votre nom" required>
+        </div>
+        <div class="form-group">
+            <input class="put" type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <input class="put" type="email" id="email" name="email" placeholder="Votre email" required>
+    </div>
+    <div class="form-group">
+        <textarea class="put" id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
+    </div>
+    <div class="checkbox-group">
+        <input type="checkbox" id="consent" name="consent" value="1" required>
+        <label for="consent">Vous consentez à recevoir des communications liées à ce service, sauf en cas de désabonnement explicite.</label>
+    </div>
+    <button type="submit" class="btn-submit">Envoyez</button>
+</form>
 
-                <input class="put"  type="email" id="email" name="email" placeholder="Votre email" required>
-            </div>
-            <div class="form-group">
-
-                <textarea class="put" id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
-            </div>
-            <div class="checkbox-group">
-                <input type="checkbox" id="consent" name="consent" required>
-                <label for="consent">Vous consentez à recevoir des communications liées à ce service, sauf en cas de désabonnement explicite.</label>
-            </div>
-            <button type="submit" class="btn-submit">Envoyez</button>
-        </form>
     </section>
     <div class="scroll-img"></div>
 
@@ -289,34 +295,35 @@
         <img src="{{ asset('img/readtechblacklogo.png') }}" alt="Logo ReadBlogTech" />
     </div>
     <div class="footer-links">
-        <a href="{{ url('/') }}" class="footer-link">Accueil</a>
+        <a href="{{ route('accueil') }}" class="footer-link">Accueil</a>
         <div class="footer-link-categories">
             <p class="footer-link">Catégories</p>
             <div class="categories-list">
                 @foreach ($categories as $category)
-                    <p class="category">{{ $category->nom }}</p>
+                    <a href="{{ route('categorie.show', ['id' => $category->id]) }}" class="category">{{ $category->nom }}</a>
                 @endforeach
             </div>
         </div>
-        <a href="{{ url('/events') }}" class="footer-link">Événements</a>
+        <a href="{{ route('evenement.show') }}" class="footer-link">Événements</a>
     </div>
     <hr class="footer-divider" />
     <div class="footer-bottom">
-        <p class="footer-copyright">© 2025 Readblogtech</p>
+        <p class="footer-copyright">© 2025 ReadTechBlog</p>
         <div class="footer-social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
         </div>
     </div>
 </footer>
 
+
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
     AOS.init({
-        duration:700, // Durée des animations en millisecondes
-        once: true,     // Animation exécutée une seule fois
+        duration:1000, 
+        once: true,     
     });
 </script>
 

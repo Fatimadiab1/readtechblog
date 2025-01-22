@@ -11,6 +11,7 @@ use App\Http\Controllers\InscriptionAdminController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\PaysController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\ContactController;
 use App\Models\Categorie;
 use App\Http\Controllers\SearchController;
 
@@ -81,3 +82,4 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('/pays{id}', [PaysController::class, 'show'])->name('pays.show');
 
     Route::get('/recherche', [SearchController::class, 'index'])->name('search');
+    Route::post('/contact', [ContactController::class, 'sendContactForm'])->name('contact.send');

@@ -9,52 +9,52 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-    <div class="flex h-screen">
-           {{-- Sidebar --}}
-           <aside class="w-64 bg-blue-600 text-white flex flex-col">
-            <div class="p-6 text-2xl font-bold">Dashboard</div>
-            <nav class="flex-grow">
-                <ul>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
-                        <a href="{{ route('dashboard') }}" class="flex items-center">
-                            <span class=" text-md font-medium">Accueil</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('admin.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Administrateurs</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('client') }}" class="flex items-center">
-                            <span class="text-md font-medium">Utilisateurs</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('categorie.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Catégories</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('article.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Articles</span>
-                        </a>
-                    </li>
-                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                        <a href="{{ route('evenement.index') }}" class="flex items-center">
-                            <span class="text-md font-medium">Evènements</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="p-6">
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <button
-                        class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
-                </form>
-            </div>
-        </aside>
+ <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-blue-600 text-white flex flex-col">
+        <div class="p-6 text-2xl font-bold">Dashboard</div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                    <a href="{{ route('dashboard') }}" class="flex items-center">
+                        <span class="text-md font-medium">Accueil</span>
+                    </a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                    <a href="{{ route('admin.index') }}" class="flex items-center">
+                        <span class="text-md font-medium">Administrateurs</span>
+                    </a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                    <a href="{{ route('client') }}" class="flex items-center">
+                        <span class="text-md font-medium">Utilisateurs</span>
+                    </a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                    <a href="{{ route('categorie.index') }}" class="flex items-center">
+                        <span class="text-md font-medium">Catégories</span>
+                    </a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                    <a href="{{ route('article.index') }}" class="flex items-center">
+                        <span class="text-md font-medium">Articles</span>
+                    </a>
+                </li>
+                <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                    <a href="{{ route('evenement.index') }}" class="flex items-center">
+                        <span class="text-md font-medium">Evènements</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="p-6">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button
+                    class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
+            </form>
+        </div>
+    </aside>
 
         <main class="flex-grow ">
             {{-- Barre du haut --}}
@@ -121,25 +121,15 @@
                     </div>
                 </div>
             </section>
-
-            {{-- Affichage des articles --}}
             <section class="p-4">
-                <h2 class="text-3xl font-semibold text-gray-900 mb-6">Statistique de vue des derniers articles</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach($article as $art)
-                        <div class="bg-white p-2 rounded-lg shadow-lg flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-lg font-semibold text-gray-500">Titre</span>
-                                <h3 class="text-lg font-bold text-gray-800">{{ $art->titre }}</h3>
-                            </div>
-                            <div class="text-center">
-                                <span class="text-lg font-semibold text-gray-500">Vues</span>
-                                <p class="text-xl font-bold text-indigo-600">{{ $art->views }}</p>
-                            </div>
-                        </div>
-                    @endforeach
+                <h2 class="text-3xl font-semibold text-gray-900 mb-6">Statistiques des articles</h2>
+           
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Vues des derniers articles</h3>
+                    <canvas id="articleViewsChart" height="100"></canvas>
                 </div>
             </section>
+            
             
             
 
@@ -147,6 +137,44 @@
     </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById('articleViewsChart').getContext('2d');
+        const articleData = @json($article->pluck('views'));
+        const articleTitles = @json($article->pluck('titre'));
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: articleTitles,
+                datasets: [{
+                    label: 'Vues',
+                    data: articleData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Articles', color: '#666' },
+                    },
+                    y: {
+                        title: { display: true, text: 'Vues', color: '#666' },
+                        beginAtZero: true,
+                    }
+                }
+            }
+        });
+    });
+</script>
+
 </html>
 
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])

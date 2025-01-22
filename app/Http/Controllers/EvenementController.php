@@ -17,14 +17,23 @@ class EvenementController extends Controller
         return view('evenement.index', compact('evenements'));
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $evenements = Evenement::all();
         $pays = Pays::all();
         $categories = \App\Models\Categorie::all(); // Ajout des catégories
     
+        // Récupérer les événements filtrés
+        $evenements = Evenement::query();
+    
+        if ($request->has('pays_id') && $request->pays_id) {
+            $evenements->where('pays_id', $request->pays_id);
+        }
+    
+        $evenements = $evenements->get();
+    
         return view('evenement.show', compact('evenements', 'pays', 'categories'));
     }
+    
     
 
     public function create()

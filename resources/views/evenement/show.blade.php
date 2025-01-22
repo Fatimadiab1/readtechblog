@@ -16,7 +16,7 @@
  .header {
     position: relative;
     height: 600px;
-    background-image: url('{{ asset('img/event.png') }}');
+    background-image: url('{{ asset('img/event.jpg') }}');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -152,16 +152,22 @@
     </header>
 {{-- MENU DÉROULANT DES PAYS --}}
 <section class="py-10 px-5">
-    <h2 class="text-2xl font-bold mb-4">Choisissez un pays</h2>
-    <div class="dropdown">
-        <button class="dropdown-btn">Sélectionner un pays <i class="fa-solid fa-caret-down" style="color: #ffffff;margin-left:5px"></i></button>
-        <div class="dropdown-content">
-            @foreach ($pays as $payss)
-                <a href="{{ route('pays.show', ['id' => $payss->id]) }}">{{ $payss->nom }}</a>
-            @endforeach
-        </div>
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Choisissez un pays</h2>
+    <div class="flex justify-center">
+        <form method="GET" action="{{ route('evenement.show') }}" class="relative w-full max-w-md">
+            <select name="pays_id" class="select-style" onchange="this.form.submit()">
+                <option value="" selected>Tous les pays</option>
+                @foreach ($pays as $payss)
+                    <option  value="{{ $payss->id }}" {{ request('pays_id') == $payss->id ? 'selected' : '' }}>
+                        {{ $payss->nom }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
     </div>
 </section>
+
+
    {{-- CONTENU --}}
    <section class="py-10 px-6">
     <div class="flex flex-col gap-10">
@@ -181,7 +187,7 @@
                 <p class="text-md text-gray-600 font-semibold">{{ $evenement->date }}</p>
 
                 <!-- Titre -->
-                <h3 class="text-xl font-bold mt-4">{{ $evenement->nom }}</h3>
+                <h3 data-aos="fade-up" class="text-xl font-bold mt-4">{{ $evenement->nom }}</h3>
 
                 <!-- Contenu -->
                 <p class="mt-2 text-gray-800">{{ $evenement->contenu }}</p>
@@ -194,28 +200,35 @@
         <img src="{{ asset('img/readtechblacklogo.png') }}" alt="Logo ReadBlogTech" />
     </div>
     <div class="footer-links">
-        <a href="{{ url('/') }}" class="footer-link">Accueil</a>
+        <a href="{{ route('accueil') }}" class="footer-link">Accueil</a>
         <div class="footer-link-categories">
             <p class="footer-link">Catégories</p>
             <div class="categories-list">
                 @foreach ($categories as $category)
-                    <p class="category">{{ $category->nom }}</p>
+                    <a href="{{ route('categorie.show', ['id' => $category->id]) }}" class="category">{{ $category->nom }}</a>
                 @endforeach
             </div>
         </div>
-        <a href="{{ url('/events') }}" class="footer-link">Événements</a>
+        <a href="{{ route('evenement.show') }}" class="footer-link">Événements</a>
     </div>
     <hr class="footer-divider" />
     <div class="footer-bottom">
-        <p class="footer-copyright">© 2025 Readblogtech</p>
+        <p class="footer-copyright">© 2025 ReadTechBlog</p>
         <div class="footer-social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
         </div>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration:500, 
+        once: true,     
+    });
+</script>
 </body>
 
 <script src="{{ asset('js/nav.js') }}"></script>

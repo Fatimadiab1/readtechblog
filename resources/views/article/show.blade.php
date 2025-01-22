@@ -191,7 +191,7 @@
                         @endif
                         <h4 class="related-article-title">{{ $relatedArticle->titre }}</h4>
                         <p class="related-article-description">{{ Str::limit($relatedArticle->description, 80) }}</p>
-                        <a href="{{ route('article.show', $relatedArticle->id) }}" class="related-article-link">Lire plus</a>
+                        <a data-aos="zoom-in" href="{{ route('article.show', $relatedArticle->id) }}" class="related-article-link">Lire plus -></a>
                     </div>
                 @endif
             @endforeach
@@ -202,28 +202,35 @@
             <img src="{{ asset('img/readtechblacklogo.png') }}" alt="Logo ReadBlogTech" />
         </div>
         <div class="footer-links">
-            <a href="{{ url('/') }}" class="footer-link">Accueil</a>
+            <a href="{{ route('accueil') }}" class="footer-link">Accueil</a>
             <div class="footer-link-categories">
                 <p class="footer-link">Catégories</p>
                 <div class="categories-list">
                     @foreach ($categories as $category)
-                        <p class="category">{{ $category->nom }}</p>
+                        <a href="{{ route('categorie.show', ['id' => $category->id]) }}" class="category">{{ $category->nom }}</a>
                     @endforeach
                 </div>
             </div>
-            <a href="{{ url('/events') }}" class="footer-link">Événements</a>
+            <a href="{{ route('evenement.show') }}" class="footer-link">Événements</a>
         </div>
         <hr class="footer-divider" />
         <div class="footer-bottom">
-            <p class="footer-copyright">© 2025 Readblogtech</p>
+            <p class="footer-copyright">© 2025 ReadTechBlog</p>
             <div class="footer-social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="https://youtube.com" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration:500, 
+        once: true,     
+    });
+</script>
 </body>
 <script src="{{ asset('js/nav.js') }}"></script>
 </html>
