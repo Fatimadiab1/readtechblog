@@ -10,53 +10,53 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen">;
     <div class="flex min-h-screen">
-            {{-- Sidebar --}}
-            <aside class="w-64 bg-blue-600 text-white flex flex-col">
-                <div class="p-6 text-2xl font-bold">Dashboard</div>
-                <nav class="flex-grow">
-                    <ul>
-                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
-                            <a href="{{ route('dashboard') }}" class="flex items-center">
-                                <span class=" text-md font-medium">Accueil</span>
-                            </a>
-                        </li>
-                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                            <a href="{{ route('admin.index') }}" class="flex items-center">
-                                <span class="text-md font-medium">Administrateurs</span>
-                            </a>
-                        </li>
-                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                            <a href="{{ route('client') }}" class="flex items-center">
-                                <span class="text-md font-medium">Utilisateurs</span>
-                            </a>
-                        </li>
-                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                            <a href="{{ route('categorie.index') }}" class="flex items-center">
-                                <span class="text-md font-medium">Catégories</span>
-                            </a>
-                        </li>
-                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                            <a href="{{ route('article.index') }}" class="flex items-center">
-                                <span class="text-md font-medium">Articles</span>
-                            </a>
-                        </li>
-                        <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
-                            <a href="{{ route('evenement.index') }}" class="flex items-center">
-                                <span class="text-md font-medium">Evènements</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="p-6">
-                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                        @csrf
-                        <button
-                            class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
-                    </form>
-                </div>
-            </aside>
+        {{-- Sidebar --}}
+        <aside class="w-64 bg-blue-600 text-white flex flex-col">
+            <div class="p-6 text-2xl font-bold">Dashboard</div>
+            <nav class="flex-grow">
+                <ul>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500 ">
+                        <a href="{{ route('dashboard') }}" class="flex items-center">
+                            <span class=" text-md font-medium">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="{{ route('admin.index') }}" class="flex items-center">
+                            <span class="text-md font-medium">Administrateurs</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="{{ route('client') }}" class="flex items-center">
+                            <span class="text-md font-medium">Utilisateurs</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="{{ route('categorie.index') }}" class="flex items-center">
+                            <span class="text-md font-medium">Catégories</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="{{ route('article.index') }}" class="flex items-center">
+                            <span class="text-md font-medium">Articles</span>
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-blue-800 transition duration-500">
+                        <a href="{{ route('evenement.index') }}" class="flex items-center">
+                            <span class="text-md font-medium">Evènements</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="p-6">
+                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <button
+                        class="w-full bg-red-600 hover:bg-red-500 py-2 rounded transition duration-500">Déconnexion</button>
+                </form>
+            </div>
+        </aside>
         <main class="flex-grow ">
             {{-- barre du haut --}}
             <header class="flex justify-between items-center p-4 bg-blue-800 text-white">
@@ -72,7 +72,7 @@
                         class="btn bg-green-600 text-white py-2 px-4 rounded shadow-md hover:bg-green-500 transition duration-300">
                         <i class="fas fa-plus"></i> Créer un Nouvel Article
                     </a>
-                    <a href="{{route('commentaire.index')}}"
+                    <a href="{{ route('commentaire.index') }}"
                         class="btn bg-green-600 ml-2 text-white py-2 px-4 rounded shadow-md hover:bg-red-500 transition duration-300">
                         <i class="fas fa-comments"></i> Gestion des Commentaires
                     </a>
@@ -95,6 +95,7 @@
                             <th class="py-2 px-4 text-left">Vue</th>
                             <th class="py-2 px-4 text-left">Date de creation</th>
                             <th class="py-2 px-4 text-left">Commentaires</th>
+                            <th class="py-2 px-4 text-left">Likes</th>
                             <th class="py-2 px-4 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -107,6 +108,7 @@
                                 <td class="py-2 px-4">{{ Str::limit($article->description, 5) }}</td>
                                 <td class="py-2 px-4">{{ Str::limit($article->sous_titre, 5) }}</td>
                                 <td class="py-2 px-4">{{ $article->views }}</td>
+                                <td class="py-2 px-4">{{ $article->likes }}</td>
                                 <td class="py-2 px-4">{{ $article->created_at }}</td>
                                 <td class="py-2 px-4">{{ $article->commentaires_count }}</td>
                                 <td class="py-2 px-4 text-center">

@@ -18,7 +18,7 @@ class ArticleController extends Controller
         $articles = Article::withCount('commentaires')->get();
         return view('article.index', compact('articles'));
     }
-   
+
     public function create()
     {
         $categories = Categorie::all();
@@ -63,17 +63,17 @@ class ArticleController extends Controller
     {
         // Récupérer l'article avec ses commentaires et utilisateurs associés
         $article = Article::with('commentaires.user')->findOrFail($id);
-    
+
         // Récupérer toutes les catégories
         $categories = Categorie::all();
-    
+
         // Incrémenter le compteur de vues
         $article->increment('views');
-    
+
         // Passer $categories à la vue
         return view('article.show', compact('article', 'categories'));
     }
-    
+
 
     public function edit($id)
     {
@@ -142,5 +142,13 @@ class ArticleController extends Controller
 
         return view('admin.dashboard', compact('articles'));
     }
-    
+    public function like($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->increment('likes'); // Incrémenter la colonne "likes"
+
+        return redirect()->back()->with('success', 'Article liké avec succès !');
+    }
+
+
 }

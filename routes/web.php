@@ -83,3 +83,5 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 
     Route::get('/recherche', [SearchController::class, 'index'])->name('search');
     Route::post('/contact', [ContactController::class, 'sendContactForm'])->name('contact.send');
+
+    Route::post('/articles/{id}/like', [ArticleController::class, 'like'])->name('articles.like');

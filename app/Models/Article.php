@@ -17,7 +17,7 @@ class Article extends Model
         'user_id',
         'category_id',
         'views',
-    ];
+        'likes',    ];
 
     public function category()
 {
