@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/readtechblacklogo.png') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -80,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     {{-- Statistiques articles --}}
                     <div class="bg-white rounded-lg shadow-xl p-6 flex items-center justify-between">
                         <div class="flex items-center">
@@ -123,15 +124,15 @@
             </section>
             <section class="p-4">
                 <h2 class="text-3xl font-semibold text-gray-900 mb-6">Statistiques des articles</h2>
-           
+
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-xl font-semibold text-gray-700 mb-4">Vues des derniers articles</h3>
                     <canvas id="articleViewsChart" height="100"></canvas>
                 </div>
             </section>
-            
-            
-            
+
+
+
 
         </main>
     </div>

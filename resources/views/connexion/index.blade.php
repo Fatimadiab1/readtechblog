@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/readtechblacklogo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -34,7 +35,7 @@
             background: url('{{ asset('img/welc2.jpg') }}') no-repeat center center;
             background-size: cover;
             background-position: center;
-           
+
 
         }
 
@@ -101,7 +102,7 @@
 
         <!-- Section droite -->
         <div class="right-section">
-       
+
             <h2>Connexion</h2>
             <form method="POST" action="{{ route('login') }}">
                 @csrf

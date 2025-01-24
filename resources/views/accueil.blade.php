@@ -7,6 +7,7 @@
     <title>Accueil</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/readtechblacklogo.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -63,8 +64,8 @@
                         required
                     >
                 </form>
-                
-                
+
+
 
                 <div class="relative">
                     <i id="auth-icon" class="fa-regular fa-circle-user text-white text-3xl cursor-pointer"></i>
@@ -105,7 +106,7 @@
             <a href="#apropos">
                 <i class="fas fa-arrow-down text-2xl md:text-3xl lg:text-4xl mt-6 text-[#008CFF] cursor-pointer"></i>
             </a>
-            
+
         </div>
 
 
@@ -121,7 +122,7 @@
             required
         >
     </form>
-    
+
 <div class="flex items-center justify-center text-center ">
 
     <a href="{{ route('accueil') }}" class="text-white m-1 font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Accueil</a>
@@ -184,7 +185,7 @@
 
         <section class="secondsection py-16">
             <p class="titrecategorie">Nos différentes <span style="color:#008CFF">catégories</span></p>
-        
+
             <div class="container">
                 <div class="slider-container">
                     <div class="slider">
@@ -202,13 +203,13 @@
                         </div>
                         @endforeach
                     </div>
-        
+
                     <button class="slider-btn prev">&lt;</button>
                     <button class="slider-btn next">&gt;</button>
                 </div>
             </div>
         </section>
-        
+
 
 {{-- Partie a propos --}}
 <section id="apropos" class="thirdsection">
@@ -322,8 +323,8 @@
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
     AOS.init({
-        duration:1000, 
-        once: true,     
+        duration:1000,
+        once: true,
     });
 </script>
 

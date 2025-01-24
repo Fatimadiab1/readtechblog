@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Evenement')
-
+<link rel="icon" type="image/x-icon" href="{{ asset('img/readtechblacklogo.png') }}">
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/evenement.css') }}">
     <style>
