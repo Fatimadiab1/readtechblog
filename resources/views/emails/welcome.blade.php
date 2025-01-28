@@ -100,7 +100,8 @@
             <p>Explorez des articles, guides et actualités qui vous inspireront et vous aideront à découvrir l'univers de l'innovation.</p>
         </div>
 
-        <!-- Footer -->
+    
+        
        <!-- Footer -->
        <div class="footer">
         Cet e-mail a été généré automatiquement par <strong>ReadTechBlog</strong>. <br>

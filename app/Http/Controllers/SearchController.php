@@ -17,21 +17,19 @@ class SearchController extends Controller
         // Rechercher dans les événements
         $evenement = Evenement::where('nom', 'LIKE', "%{$query}%")->first();
         if ($evenement) {
-            // Rediriger vers la page "show événement"
             return redirect()->route('evenement.show', ['id' => $evenement->id]);
         }
 
         // Rechercher dans les catégories
         $categorie = Categorie::where('nom', 'LIKE', "%{$query}%")->first();
         if ($categorie) {
-            // Rediriger vers la page "show catégorie"
             return redirect()->route('categorie.show', ['id' => $categorie->id]);
         }
 
         // Rechercher dans les articles (si nécessaire)
         $article = Article::where('titre', 'LIKE', "%{$query}%")->first();
         if ($article) {
-            // Rediriger vers la page "show article"
+  
             return redirect()->route('article.show', ['id' => $article->id]);
         }
 
