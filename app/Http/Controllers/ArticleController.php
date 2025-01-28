@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Categorie;
 use App\Models\Commentaire;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,19 +13,21 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        // $articles = Article::all();
+        // Récupérer les articles avec le nombre de commentaires
         $articles = Article::withCount('commentaires')->get();
         return view('article.index', compact('articles'));
     }
 
     public function create()
     {
+        // Récupérer toutes les catégories pour le formulaire
         $categories = Categorie::all();
         return view('article.create', compact('categories'));
     }
+
     public function store(Request $request)
     {
-
+        // Validation des données
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:255',
@@ -36,17 +37,13 @@ class ArticleController extends Controller
             'video' => 'nullable|mimes:mp4,mov,avi,wmv|max:10240',
             'category_id' => 'required|exists:categories,id',
         ]);
-        $imagePath = null;
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-        }
 
-        $videoPath = null;
-        if ($request->hasFile('video')) {
-            $videoPath = $request->file('video')->store('videos', 'public');
-        }
+        // Stockage des fichiers (image et vidéo)
+        $imagePath = $request->hasFile('image') ? $request->file('image')->store('images', 'public') : null;
+        $videoPath = $request->hasFile('video') ? $request->file('video')->store('videos', 'public') : null;
 
-        $article = Article::create([
+        // Création de l'article
+        Article::create([
             'titre' => $request->titre,
             'description' => $request->description,
             'sous_titre' => $request->sous_titre,
@@ -56,27 +53,23 @@ class ArticleController extends Controller
             'user_id' => Auth::id(),
             'category_id' => $request->category_id,
         ]);
-        return redirect()->route('article.index', compact('article'))->with('success', 'Article créé avec succès!');
+
+        return redirect()->route('article.index')->with('success', 'Article créé avec succès!');
     }
 
     public function show($id)
     {
-        // Récupérer l'article avec ses commentaires et utilisateurs associés
+        // Récupérer un article avec ses commentaires et catégories
         $article = Article::with('commentaires.user')->findOrFail($id);
-
-        // Récupérer toutes les catégories
         $categories = Categorie::all();
+        $article->increment('views'); 
 
-        // Incrémenter le compteur de vues
-        $article->increment('views');
-
-        // Passer $categories à la vue
         return view('article.show', compact('article', 'categories'));
     }
 
-
     public function edit($id)
     {
+        // Récupérer un article et les catégories pour modification
         $article = Article::findOrFail($id);
         $categories = Categorie::all();
         return view('article.edit', compact('article', 'categories'));
@@ -84,6 +77,7 @@ class ArticleController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validation des données
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:255',
@@ -96,17 +90,15 @@ class ArticleController extends Controller
 
         $article = Article::findOrFail($id);
 
-        // Gérer l'image si elle est téléchargée
+        // Mise à jour des fichiers (image et vidéo)
         $imagePath = $article->image;
         if ($request->hasFile('image')) {
-
             if ($imagePath) {
                 Storage::disk('public')->delete($imagePath);
             }
             $imagePath = $request->file('image')->store('images', 'public');
         }
 
-        // Gérer la video si elle est téléchargée
         $videoPath = $article->video;
         if ($request->hasFile('video')) {
             if ($videoPath) {
@@ -115,6 +107,7 @@ class ArticleController extends Controller
             $videoPath = $request->file('video')->store('videos', 'public');
         }
 
+        // Mise à jour de l'article
         $article->update([
             'titre' => $request->titre,
             'description' => $request->description,
@@ -128,27 +121,28 @@ class ArticleController extends Controller
         return redirect()->route('article.index')->with('success', 'Article mis à jour avec succès!');
     }
 
-
     public function destroy($id)
     {
+        // Supprimer un article
         $article = Article::findOrFail($id);
         $article->delete();
 
         return redirect()->route('article.index')->with('success', 'Article supprimé avec succès!');
     }
-    public function dashboard()
-    {
-        $articles = Article::all();
 
-        return view('admin.dashboard', compact('articles'));
-    }
     public function like($id)
     {
+        // Ajouter un like à l'article
         $article = Article::findOrFail($id);
-        $article->increment('likes'); // Incrémenter la colonne "likes"
+        $article->increment('likes');
 
-        return redirect()->back()->with('success', 'Article liké avec succès !');
+        return redirect()->back()->with('success', 'Article liké avec succès!');
     }
 
-
+    public function dashboard()
+    {
+        // Récupérer tous les articles pour l'administration
+        $articles = Article::all();
+        return view('admin.dashboard', compact('articles'));
+    }
 }

@@ -1,3 +1,34 @@
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const minimumTime = 2000; 
+
+        // Référence au loader
+        const loader = document.getElementById("loader");
+
+        const hideLoader = () => {
+            loader.classList.add("hidden"); 
+            setTimeout(() => {
+                document.body.classList.remove("loading"); 
+            }, 800);
+        };
+
+       
+        window.addEventListener("load", function () {
+            const startTime = performance.now();
+            const remainingTime = minimumTime - (performance.now() - startTime);
+
+       
+            if (remainingTime > 0) {
+                setTimeout(hideLoader, remainingTime);
+            } else {
+                hideLoader();
+            }
+        });
+    });
+
+
+
+
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 const userIcon = document.getElementById('user-icon');
@@ -92,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateSlider() {
         const slideWidth = slider.querySelector(".slide").offsetWidth;
         const totalSlides = slider.children.length;
-        const visibleSlides = 3; // Nombre de slides visibles
+        const visibleSlides = 3; 
         const maxIndex = totalSlides - visibleSlides;
 
         // Empêche de dépasser les limites
@@ -117,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSlider();
     });
 
-    // Initialise le slider
+   
     updateSlider();
 });
 

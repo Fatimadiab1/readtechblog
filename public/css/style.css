@@ -6,6 +6,57 @@ body {
     background-color: #F9F9F9;
 }
 
+
+/* Loader */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+    transition: opacity 0.5s ease-in-out, visibility 0.5s;
+}
+
+.loader-logo {
+    width: 200px; 
+    animation: fade-in 1.5s ease-in-out infinite alternate; 
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out; 
+}
+
+
+#loader.hidden .loader-logo {
+    transform: translateY(-150%); 
+    opacity: 0; 
+}
+
+#loader.hidden {
+    opacity: 0; 
+    visibility: hidden; 
+}
+
+
+@keyframes fade-in {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
 /* Section des articles */
 .firstsection {
     display: flex;

@@ -278,3 +278,25 @@ margin-right: 7px;
 .social-icon:hover {
     color: #007bff;
 }
+ /* Style du bouton "J'aime" */
+ .like-form {
+    margin-top: 20px;
+}
+
+.like-button {
+    background-color: transparent;
+    border: none;
+    color: #dc3545;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+    transform: scale(1.2);
+    color: #ff0000;
+}
+
+.like-button:focus {
+    outline: none;
+}

@@ -17,7 +17,11 @@
 
 </head>
 
-<body>
+<body class="loading">
+    <div id="loader">
+        <img src="{{ asset('img/readtechblogwhite.png') }}" alt="ReadTech Logo" class="loader-logo">
+    </div>
+    
     <header class="h-[750px]">
         <!-- BACKGROUND VIDEO -->
         <video autoplay muted loop class="absolute top-0 left-0 w-full h-[750px] object-cover -z-10">
@@ -43,8 +47,7 @@
                         </div>
                     </div>
 
-                    {{-- @foreach ($evenements as $evenement)
-                    @endforeach --}}
+                   
                 <a href="{{route('evenement.show')}}"
                     class="text-white font-montserrat font-semibold text-lg transition-colors duration-500 ease-in-out hover:text-[#008CFF]">Evènements</a>
             </div>

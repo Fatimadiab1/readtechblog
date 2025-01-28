@@ -93,9 +93,10 @@
                             <th class="py-2 px-4 text-left">Description</th>
                             <th class="py-2 px-4 text-left">Sous-titre</th>
                             <th class="py-2 px-4 text-left">Vue</th>
+                            <th class="py-2 px-4 text-left">Likes</th>
                             <th class="py-2 px-4 text-left">Date de creation</th>
                             <th class="py-2 px-4 text-left">Commentaires</th>
-                            <th class="py-2 px-4 text-left">Likes</th>
+                          
                             <th class="py-2 px-4 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -108,7 +109,7 @@
                                 <td class="py-2 px-4">{{ Str::limit($article->description, 5) }}</td>
                                 <td class="py-2 px-4">{{ Str::limit($article->sous_titre, 5) }}</td>
                                 <td class="py-2 px-4">{{ $article->views }}</td>
-                                <td class="py-2 px-4">{{ $article->likes }}</td>
+                                <td class="py-2 px-4">{{ $article->likes ?? 0 }}</td>
                                 <td class="py-2 px-4">{{ $article->created_at }}</td>
                                 <td class="py-2 px-4">{{ $article->commentaires_count }}</td>
                                 <td class="py-2 px-4 text-center">

@@ -41,7 +41,7 @@
         @foreach ($categorie->articles as $article)
             <div class="article-card">
 
-                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->titre }}" class="article-image h-[250px]">
+                <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->titre }}" class="article-image" style="height: 250px">
 
 
                 <h3 class="article-title">{{ $article->titre }}</h3>

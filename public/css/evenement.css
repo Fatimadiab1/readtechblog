@@ -1,7 +1,7 @@
 /* Navbar */
 nav {
     position: relative;
-    z-index: 20; /* Plus élevé pour que la navbar soit au-dessus des autres */
+    z-index: 20; 
 }
 
 .titre{
@@ -20,12 +20,12 @@ nav {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1; /* Toujours derrière le contenu */
+    z-index: 1;
 }
 
 .header .content {
     position: relative;
-    z-index: 2; /* Au-dessus de l'overlay */
+    z-index: 2; 
     color: white;
 }
 
@@ -34,7 +34,7 @@ nav {
     position: relative;
     display: inline-block;
     text-align: center;
-    z-index: 20; /* Le menu doit être au-dessus de la navbar mais sous les éléments principaux */
+    z-index: 20; 
 }
 
 .dropdown .dropdown-btn {
@@ -54,7 +54,7 @@ nav {
     background-color: white;
     min-width: 200px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 30; /* Le menu apparaît au-dessus de la navbar */
+    z-index: 30; 
 }
 
 .dropdown-content a {
@@ -70,7 +70,7 @@ nav {
 }
 
 .dropdown:hover .dropdown-content {
-    display: block; /* Affiche le menu déroulant au survol */
+    display: block;
 }
 
 /* Les événements */
@@ -84,10 +84,10 @@ nav {
     color: #374151; 
     font-size: 1.125rem; 
     font-weight: 500; 
-    border-radius: 0.5rem; /* Rounded-lg */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow-md */
-    padding: 0.5rem 1rem; /* px-4 py-2 */
-    transition: all 0.5s ease; /* Smooth transition */
+    border-radius: 0.5rem; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    padding: 0.5rem 1rem; 
+    transition: all 0.5s ease; 
     cursor: pointer;
 }
 
